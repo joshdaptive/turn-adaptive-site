@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Turner Adaptive Strategies — Beyond sustainable. Adaptive.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:    #EDE4D2;
+    --paper-2:  #E4D8BF;
+    --paper-3:  #D9CCAF;
+    --cream-warm: #EDE4D2;
+    --forest:   #2D3F33;
+    --forest-deep: #1F2D24;
+    --moss:     #4F6A52;
+    --ink:      #2A2520;
+    --ink-soft: #4A4239;
+    --ink-muted:#8A7F6E;
+    --blood:    #B8542C;
+    --blood-2:  #D26B3A;
+    --peach:    #E8A87C;
+    --rule:     #CFC2A6;
+    --rule-soft:#DCD0B5;
+    --serif: "Cormorant Garamond", "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family:var(--sans);
+    background:var(--paper);color:var(--ink);
+    font-weight:400;line-height:1.55;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  }
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--blood);color:var(--paper)}
+
+  /* Typographic richness — small caps treatment for serif marks */
+  .smcp{
+    font-family:var(--serif);font-weight:500;
+    font-variant:small-caps;letter-spacing:.08em;
+  }
+  .practice-lead::first-letter,
+  .hero .lede::first-letter{
+    font-family:var(--serif);font-style:italic;font-weight:400;
+    font-size:3.6em;line-height:.85;
+    float:left;margin:.08em .14em -.05em 0;color:var(--blood);
+  }
+  .talk .venue{position:relative;display:inline-block;padding-bottom:6px}
+  .talk .venue::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+    background:var(--blood);opacity:.5;
+  }
+  .talk.featured .venue::after{background:var(--peach);opacity:.55}
+
+  .wrap{
+    width:100%;max-width:min(1440px, 92vw);
+    margin:0 auto;padding:0 clamp(24px, 4vw, 72px);
+  }
+  @media (min-width:2200px){.wrap{max-width:1680px}}
+  @media (min-width:3000px){.wrap{max-width:1880px}}
+
+  .eyebrow{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--ink-muted);font-weight:500;
+  }
+  .eyebrow .dot{display:inline-block;width:5px;height:5px;border-radius:50%;
+    background:var(--blood);margin-right:12px;vertical-align:2px;}
+
+  /* ── Nav ─────────────────────────────────────────────── */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:var(--forest);color:var(--paper);
+    border-bottom:1px solid rgba(245,239,230,.14);
+  }
+  .nav.scrolled{background:var(--forest-deep)}
+  .nav-row{display:flex;align-items:center;justify-content:space-between;height:80px}
+  .brand{
+    display:flex;align-items:center;gap:0;
+    color:var(--paper);line-height:1;
+  }
+  .brand .wordmark{
+    display:flex;flex-direction:column;align-items:flex-start;gap:5px;
+    padding:4px 0 5px;
+    border-top:1px solid rgba(245,239,230,.30);
+    border-bottom:1px solid rgba(245,239,230,.30);
+  }
+  .brand .wordmark .top{
+    font-family:var(--serif);font-weight:500;
+    font-size:24px;letter-spacing:.005em;
+    color:var(--paper);line-height:1;
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .brand .wordmark .top em{
+    font-family:var(--serif);font-style:italic;font-weight:400;
+    color:var(--peach);font-size:26px;letter-spacing:0;
+    margin:0 -1px;
+  }
+  .brand .wordmark .sub{
+    font-family:var(--serif);font-weight:500;font-variant:small-caps;
+    font-size:10px;letter-spacing:.36em;
+    color:rgba(245,239,230,.78);line-height:1;
+  }
+  @media (max-width:640px){
+    .brand .wordmark .top{font-size:18px}
+    .brand .wordmark .top em{font-size:20px}
+    .brand .wordmark .sub{font-size:8.5px;letter-spacing:.28em}
+  }
+  .nav-links{display:flex;gap:38px;align-items:center}
+  .nav-links a{font-size:13px;color:rgba(245,239,230,.78);transition:color .2s;letter-spacing:.02em}
+  .nav-links a:hover{color:var(--peach)}
+  .nav-links a.cta{
+    color:var(--paper);border:1px solid rgba(245,239,230,.45);
+    padding:10px 20px;border-radius:0;
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    transition:all .2s;
+  }
+  .nav-links a.cta:hover{background:var(--blood);border-color:var(--blood);color:var(--paper)}
+  @media (max-width:820px){.nav-links a{display:none}.nav-links a:last-child{display:inline-block}}
+
+  /* ── Hero ────────────────────────────────────────────── */
+  .hero{
+    position:relative;overflow:hidden;
+    background:var(--paper);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(ellipse 56% 70% at 92% 12%, rgba(184,84,44,.10), transparent 62%),
+      radial-gradient(ellipse 48% 55% at -6% 95%, rgba(45,63,51,.10), transparent 60%);
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(to right, rgba(42,37,32,.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(42,37,32,.045) 1px, transparent 1px);
+    background-size:calc(100%/12) 100%, 100% 96px;
+    background-position:24px 0, 0 0;
+    opacity:.7;mask-image:linear-gradient(180deg, rgba(0,0,0,.6), rgba(0,0,0,0) 88%);
+  }
+  .hero-deco{
+    position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;
+  }
+  .hero-deco svg{position:absolute;display:block}
+  .hero-deco .ring{
+    top:-180px;right:-160px;width:520px;height:520px;color:rgba(184,84,44,.20);
+  }
+  .hero-deco .ring-2{
+    top:60px;right:-260px;width:680px;height:680px;color:rgba(42,37,32,.07);
+  }
+  .hero-deco .arc{
+    bottom:-220px;left:-180px;width:560px;height:560px;color:rgba(45,63,51,.10);
+  }
+  /* Lower-right counter-ring */
+  .hero-deco .ring-3{
+    bottom:-220px;right:-180px;width:560px;height:560px;color:rgba(184,84,44,.10);
+  }
+  /* Compass / diagram mid-left */
+  .hero-deco .compass{
+    top:38%;left:-80px;width:280px;height:280px;color:rgba(42,37,32,.07);
+    transform:translateY(-50%);
+  }
+  /* Diagonal blueprint line crossing hero */
+  .hero-deco .blueprint{
+    top:0;left:0;width:100%;height:100%;color:rgba(184,84,44,.08);
+  }
+  /* Tick marks down the left edge */
+  .hero-deco .ticks{
+    position:absolute;left:14px;top:18%;bottom:14%;width:1px;
+    background:linear-gradient(to bottom,
+      rgba(42,37,32,.18) 0,rgba(42,37,32,.18) 1px,transparent 1px,transparent 32px);
+    background-size:1px 32px;
+  }
+  .hero-deco .ticks::before,.hero-deco .ticks::after{
+    content:"";position:absolute;left:-3px;width:8px;height:1px;background:rgba(42,37,32,.30);
+  }
+  .hero-deco .ticks::before{top:0}
+  .hero-deco .ticks::after{bottom:0}
+  /* Tiny ampersand top-left */
+  .hero-deco .glyph-2{
+    position:absolute;top:80px;left:6vw;
+    font-family:var(--serif);font-style:italic;font-weight:300;
+    font-size:120px;line-height:1;color:rgba(184,84,44,.08);
+    user-select:none;pointer-events:none;
+  }
+  /* Diamond cluster bottom-right */
+  .hero-deco .diamond{
+    bottom:18%;right:6vw;width:140px;height:140px;color:rgba(45,63,51,.18);
+  }
+  /* 5-pointed star (Texas / pointe) — small, above portrait card */
+  .hero-deco .star{
+    top:34px;right:8vw;width:54px;height:54px;color:rgba(184,84,44,.45);
+  }
+  /* Arabesque sweep — thin curve arcing across the top of the hero */
+  .hero-deco .arabesque{
+    top:0;left:0;width:100%;height:240px;
+    color:rgba(45,63,51,.22);
+  }
+  /* Protractor diagram top-right of hero */
+  .hero-deco .protractor{
+    top:120px;right:10vw;width:240px;height:144px;color:rgba(184,84,44,.18);
+  }
+  /* Section glyph bottom-left */
+  .hero-deco .glyph-3{
+    position:absolute;left:8vw;top:46%;
+    font-family:var(--serif);font-style:italic;font-weight:300;
+    font-size:84px;color:rgba(45,63,51,.16);line-height:1;letter-spacing:-.02em;
+    user-select:none;
+  }
+  @media (max-width:820px){
+    .hero-deco .protractor,.hero-deco .glyph-3{display:none}
+    .hero-deco .ring,.hero-deco .ring-2{width:340px;height:340px;top:-120px;right:-120px}
+    .hero-deco .compass,.hero-deco .ring-3,.hero-deco .glyph-2,.hero-deco .diamond{display:none}
+    .hero-deco .ticks{display:none}
+    .hero-deco .star,.hero-deco .arabesque{display:none}
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:0;
+    min-height:720px;align-items:stretch;position:relative;z-index:2;
+  }
+  @media (max-width:920px){.hero-inner{grid-template-columns:1fr;min-height:auto}}
+
+  .hero-text{
+    padding:clamp(80px,8vw,140px) clamp(32px,4vw,72px) clamp(80px,8vw,140px) 0;
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;z-index:2;
+  }
+  @media (max-width:920px){.hero-text{padding:90px 0 56px}}
+  .hero h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(56px,8vw,128px);
+    line-height:.96;letter-spacing:-.02em;
+    margin:0 0 32px;color:var(--ink);text-wrap:balance;
+  }
+  .hero h1 em{font-style:italic;color:var(--blood);font-weight:400;position:relative}
+  .hero h1 em::after{
+    content:"";position:absolute;left:0;right:0;bottom:.08em;
+    height:.16em;background:rgba(232,168,124,.42);z-index:-1;
+  }
+  .hero .lede{
+    font-size:clamp(17px,1.4vw,21px);line-height:1.6;color:var(--ink-soft);
+    max-width:560px;margin:0 0 40px;font-weight:400;text-wrap:pretty;
+  }
+  .hero .lede em{
+    font-family:var(--serif);font-style:italic;color:var(--ink);
+    font-weight:400;
+  }
+  .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:14px;
+    padding:16px 26px;font-family:var(--mono);
+    font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;
+    cursor:pointer;border:1px solid;transition:all .2s;
+  }
+  .btn-primary{background:var(--forest);border-color:var(--forest);color:var(--paper)}
+  .btn-primary:hover{background:var(--ink);border-color:var(--ink)}
+  .btn-ghost{background:transparent;border-color:var(--rule);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .btn .arr{transition:transform .2s}
+  .btn:hover .arr{transform:translateX(4px)}
+
+  /* Portrait */
+  .hero-portrait{
+    position:relative;align-self:stretch;
+    background:var(--ink);
+    overflow:hidden;min-height:580px;
+  }
+  .hero-portrait img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;object-position:center top;
+  }
+  .hero-portrait::before{
+    content:"";position:absolute;inset:0;z-index:2;
+    background:linear-gradient(180deg, transparent 75%, rgba(31,45,36,.30) 100%);
+    pointer-events:none;
+  }
+  .hero-portrait::after{
+    content:"";position:absolute;inset:14px;z-index:3;
+    border:1px solid rgba(245,239,230,.20);pointer-events:none;
+  }
+  .portrait-tag{
+    position:absolute;left:32px;top:32px;z-index:4;
+    font-family:var(--mono);font-size:10px;letter-spacing:.26em;
+    color:var(--paper);text-transform:uppercase;line-height:1.5;
+    background:rgba(31,45,36,.45);padding:8px 12px 8px 14px;
+    border-left:2px solid var(--peach);backdrop-filter:blur(4px);
+  }
+  .portrait-tag b{font-weight:500;color:var(--paper)}
+
+  /* Speaking credentials strip */
+  .speak-creds{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    margin-bottom:48px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  }
+  @media (max-width:720px){.speak-creds{grid-template-columns:1fr}}
+  .speak-creds > div{
+    padding:24px 28px;border-right:1px solid var(--rule);
+    display:flex;align-items:baseline;gap:18px;
+  }
+  .speak-creds > div:last-child{border-right:none}
+  .speak-creds .c-num{
+    font-family:var(--serif);font-size:34px;line-height:1;color:var(--ink);font-weight:400;letter-spacing:-.01em;flex-shrink:0;
+  }
+  .speak-creds .c-num em{font-style:italic;color:var(--blood)}
+  .speak-creds .c-lbl{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    color:var(--ink-muted);text-transform:uppercase;line-height:1.5;
+  }
+
+  /* ── Marquee ─────────────────────────────────────────── */
+  .strip{background:var(--forest);color:var(--paper);overflow:hidden}
+  .strip-row{
+    display:flex;gap:64px;align-items:center;padding:18px 0;white-space:nowrap;
+    font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:rgba(245,239,230,.82);animation:scroll 42s linear infinite;
+  }
+  .strip-row span{display:inline-flex;align-items:center;gap:64px}
+  .strip-row .star{color:var(--peach);font-family:var(--serif);font-size:18px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ── Sections ────────────────────────────────────────── */
+  section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
+  .sec-head{
+    display:grid;grid-template-columns:.4fr 1fr;gap:64px;
+    align-items:end;margin-bottom:clamp(56px,7vw,100px);
+  }
+  @media (max-width:820px){.sec-head{grid-template-columns:1fr;gap:24px}}
+  .sec-head h2{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(40px,5vw,84px);
+    line-height:1.02;letter-spacing:-.015em;
+    margin:14px 0 0;color:var(--ink);text-wrap:balance;
+  }
+  .sec-head h2 em{font-style:italic;color:var(--blood);font-weight:400}
+  .sec-head .kicker{display:flex;align-items:center;gap:14px}
+  .sec-head .num{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink-muted)}
+
+  /* ── Practice ────────────────────────────────────────── */
+  .practice{background:var(--paper-2)}
+  .practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:8px}
+  @media (max-width:820px){.practice-grid{grid-template-columns:1fr;gap:32px}}
+  .practice-lead{
+    font-family:var(--serif);font-size:clamp(26px,2.4vw,36px);line-height:1.22;font-weight:400;
+    color:var(--ink);margin:0;text-wrap:balance;
+  }
+  .practice-lead em{font-style:italic;color:var(--blood)}
+  .practice p{margin:0 0 20px;color:var(--ink-soft);font-size:16px;line-height:1.7}
+
+  .creds{
+    margin-top:80px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    border-top:1px solid var(--rule);
+  }
+  @media (max-width:720px){.creds{grid-template-columns:1fr 1fr}}
+  .creds > div{padding:32px 28px;border-right:1px solid var(--rule)}
+  .creds > div:last-child{border-right:none}
+  .creds dt{
+    font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+    color:var(--blood);text-transform:uppercase;margin:0 0 12px;
+  }
+  .creds dd{
+    font-family:var(--serif);font-size:21px;color:var(--ink);margin:0;line-height:1.3;font-weight:400;
+  }
+
+  /* ── Services ────────────────────────────────────────── */
+  .services{background:var(--paper)}
+  .services-list{border-top:1px solid var(--rule)}
+  .svc{
+    display:grid;grid-template-columns:80px 1.1fr 1fr; /* arrow column (was 70px) removed */
+    gap:48px;align-items:start;padding:46px 0;
+    border-bottom:1px solid var(--rule);
+    transition:padding .25s ease,background .25s;
+    position:relative;cursor:pointer;
+  }
+  @media (max-width:820px){.svc{grid-template-columns:60px 1fr;gap:24px}}
+  .svc::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:0;
+    background:var(--blood);transition:width .25s ease;
+  }
+  .svc:hover{padding-left:24px;padding-right:24px;background:var(--paper-2)}
+  .svc:hover::before{width:3px}
+  .svc .n{font-family:var(--serif);font-style:italic;font-size:32px;color:var(--ink-muted);font-weight:400}
+  .svc h3{
+    font-family:var(--serif);font-weight:400;font-size:30px;
+    line-height:1.15;margin:0 0 10px;letter-spacing:-.005em;color:var(--ink);
+  }
+  .svc .tags{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    color:var(--ink-muted);text-transform:uppercase;
+  }
+  .svc p{font-size:15px;line-height:1.65;color:var(--ink-soft);margin:0;text-wrap:pretty}
+  @media (max-width:820px){.svc p{display:none}}
+  /* Arrow indicator — hidden until services link somewhere.
+     To restore: uncomment this block, restore `70px` in .svc grid-template-columns above,
+     re-add `.svc .arrow` to the 820px media query, and uncomment the <div class="arrow">→</div>
+     in each .svc element below.
+  .svc .arrow{
+    justify-self:end;align-self:center;
+    width:46px;height:46px;border:1px solid var(--rule);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--ink-muted);transition:all .2s;
+  }
+  .svc:hover .arrow{background:var(--blood);color:var(--paper);border-color:var(--blood)}
+  */
+
+  /* ── Approach (forest band) ──────────────────────────── */
+  .approach{background:var(--forest);color:var(--paper);position:relative;overflow:hidden;border-bottom:none}
+  .approach::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse 90% 60% at 80% 30%, rgba(184,84,44,.16), transparent 60%);
+    pointer-events:none;
+  }
+  .approach .wrap{position:relative;z-index:1}
+  .approach .sec-head h2{color:var(--paper)}
+  .approach .sec-head h2 em{color:var(--peach)}
+  .approach .sec-head .num{color:rgba(245,239,230,.55)}
+  .approach .sec-head .eyebrow{color:rgba(245,239,230,.7)}
+  .approach .sec-head .eyebrow .dot{background:var(--peach)}
+  .pillars{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:rgba(245,239,230,.18);border:1px solid rgba(245,239,230,.18);
+  }
+  @media (max-width:820px){.pillars{grid-template-columns:1fr}}
+  .pillar{
+    background:var(--forest);padding:48px 36px 56px;
+    display:flex;flex-direction:column;gap:18px;min-height:300px;
+  }
+  .pillar:hover{background:var(--forest-deep)}
+  .pillar .num{
+    font-family:var(--serif);font-style:italic;font-size:42px;
+    color:var(--peach);line-height:1;
+  }
+  .pillar h4{font-family:var(--serif);font-weight:400;font-size:28px;margin:0;line-height:1.15;color:var(--paper)}
+  .pillar p{font-size:15px;line-height:1.6;color:rgba(245,239,230,.84);margin:0;text-wrap:pretty}
+  .pillar .meta{
+    margin-top:auto;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.22em;color:rgba(245,239,230,.55);text-transform:uppercase;
+  }
+
+  /* ── Speaking ────────────────────────────────────────── */
+  .speaking{background:var(--paper)}
+  .speak-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;
+    background:var(--rule);border:1px solid var(--rule);
+  }
+  @media (max-width:820px){.speak-grid{grid-template-columns:1fr}}
+  .talk{
+    background:var(--paper);padding:46px 40px;
+    display:flex;flex-direction:column;gap:14px;min-height:340px;
+    transition:background .25s;
+  }
+  .talk:hover{background:var(--paper-2)}
+  .talk .venue{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;
+    color:var(--blood);text-transform:uppercase;font-weight:500;
+  }
+  .talk h4{
+    font-family:var(--serif);font-weight:400;font-size:28px;
+    line-height:1.15;margin:0;letter-spacing:-.005em;color:var(--ink);text-wrap:balance;
+  }
+  .talk p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);margin:0;text-wrap:pretty}
+  .talk .meta{
+    margin-top:auto;display:flex;gap:24px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;
+    color:var(--ink-muted);text-transform:uppercase;
+    padding-top:18px;border-top:1px solid var(--rule);
+  }
+  .talk.featured{background:var(--forest);color:var(--paper)}
+  .talk.featured h4{color:var(--paper)}
+  .talk.featured p{color:rgba(245,239,230,.84)}
+  .talk.featured .venue{color:var(--peach)}
+  .talk.featured .meta{color:rgba(245,239,230,.6);border-top-color:rgba(245,239,230,.18)}
+  .talk.featured:hover{background:var(--forest-deep)}
+
+  .upcoming{
+    margin-top:80px;padding:48px;
+    background:var(--paper-2);border:1px solid var(--rule);
+    display:grid;grid-template-columns:.6fr 1.4fr;gap:48px;align-items:center;
+  }
+  @media (max-width:820px){.upcoming{grid-template-columns:1fr;gap:24px;padding:32px}}
+  .upcoming .label{
+    font-family:var(--mono);font-size:11px;letter-spacing:.24em;
+    color:var(--blood);text-transform:uppercase;font-weight:500;margin-bottom:14px;
+  }
+  .upcoming h3{
+    font-family:var(--serif);font-weight:400;font-size:36px;
+    line-height:1.1;margin:0;color:var(--ink);text-wrap:balance;
+  }
+  .upcoming h3 em{font-style:italic;color:var(--blood)}
+  .upcoming-sessions{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:720px){.upcoming-sessions{grid-template-columns:1fr}}
+  .session{padding:18px 20px;background:var(--paper);border:1px solid var(--rule)}
+  .session .ses-meta{
+    font-family:var(--mono);font-size:10px;letter-spacing:.2em;
+    color:var(--ink-muted);text-transform:uppercase;margin-bottom:10px;
+  }
+  .session h5{font-family:var(--serif);font-weight:500;font-size:17px;line-height:1.25;margin:0;color:var(--ink)}
+
+  /* ── Topics ──────────────────────────────────────────── */
+  .topics{background:var(--paper-2)}
+  .topic-cols{columns:2;column-gap:64px}
+  @media (max-width:720px){.topic-cols{columns:1}}
+  .topic-cols ul{margin:0;padding:0}
+  .topic-cols li{
+    list-style:none;padding:20px 0;border-bottom:1px solid var(--rule);
+    display:flex;align-items:baseline;gap:18px;break-inside:avoid;
+    font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);
+  }
+  .topic-cols li .n{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
+    color:var(--blood);font-weight:500;flex-shrink:0;
+  }
+
+  /* ── Contact ─────────────────────────────────────────── */
+  .contact{
+    background:var(--paper);position:relative;overflow:hidden;
+    border-bottom:none;padding:clamp(110px,12vw,180px) 0 110px;
+  }
+  .contact::before{
+    content:"";position:absolute;inset:0;
+    background:
+      radial-gradient(ellipse 70% 50% at 90% 20%, rgba(45,63,51,.10), transparent 60%),
+      radial-gradient(ellipse 60% 60% at 10% 90%, rgba(184,84,44,.10), transparent 60%);
+    pointer-events:none;
+  }
+  .contact .wrap{position:relative;z-index:1}
+  .contact h2{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(56px,8vw,128px);
+    line-height:.96;letter-spacing:-.02em;
+    margin:24px 0 56px;max-width:14ch;color:var(--ink);text-wrap:balance;
+  }
+  .contact h2 em{font-style:italic;color:var(--blood)}
+  .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:80px;align-items:start}
+  @media (max-width:820px){.contact-grid{grid-template-columns:1fr;gap:48px}}
+  .contact .lede{
+    font-size:17px;line-height:1.65;color:var(--ink-soft);
+    max-width:480px;margin:0 0 36px;text-wrap:pretty;
+  }
+  .contact-form{
+    background:var(--paper-2);border:1px solid var(--rule);padding:36px;
+  }
+  .contact-form label{
+    font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+    color:var(--ink-muted);text-transform:uppercase;display:block;margin-bottom:8px;
+  }
+  .contact-form input,.contact-form textarea,.contact-form select{
+    width:100%;background:transparent;border:none;
+    border-bottom:1px solid var(--rule);
+    padding:8px 0 14px;color:var(--ink);
+    font-family:var(--sans);font-size:15px;
+    margin-bottom:24px;outline:none;transition:border-color .2s;
+  }
+  .contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{
+    border-bottom-color:var(--blood);
+  }
+  .contact-form select option{background:var(--paper);color:var(--ink)}
+  .contact-form textarea{min-height:80px;resize:vertical}
+  .contact-form button{
+    width:100%;padding:18px;background:var(--forest);color:var(--paper);
+    border:none;font-family:var(--mono);font-weight:500;font-size:11.5px;
+    letter-spacing:.24em;text-transform:uppercase;cursor:pointer;
+    transition:background .2s;
+  }
+  .contact-form button:hover{background:var(--ink)}
+  .contact-form .sent{
+    text-align:center;padding:24px;
+    font-family:var(--serif);font-style:italic;font-size:22px;color:var(--blood);
+  }
+
+  .contact-meta{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+    margin-top:80px;border-top:1px solid var(--rule);
+  }
+  @media (max-width:720px){.contact-meta{grid-template-columns:1fr}}
+  .contact-meta > div{padding:28px 28px;border-right:1px solid var(--rule)}
+  .contact-meta > div:last-child{border-right:none}
+  .contact-meta dt{
+    font-family:var(--mono);font-size:10px;letter-spacing:.22em;
+    color:var(--ink-muted);text-transform:uppercase;margin-bottom:10px;
+  }
+  .contact-meta dd{margin:0;font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:400}
+  .contact-meta dd a{border-bottom:1px solid var(--rule)}
+
+  /* ── Footer ──────────────────────────────────────────── */
+  footer{
+    background:var(--forest-deep);color:rgba(245,239,230,.6);
+    padding:36px 0;border-top:1px solid rgba(245,239,230,.14);
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  }
+  footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
+  footer .star{color:var(--peach)}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a href="#top" class="brand" aria-label="Turner Adaptive Strategies">
+      <span class="wordmark">
+        <span class="top">Turner <em>Adaptive</em> Strategies</span>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#practice">Practice</a>
+      <a href="#services">Services</a>
+      <a href="#approach">Approach</a>
+      <a href="#speaking">Speaking</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" data-screen-label="01 Hero">
+  <div class="hero-deco" aria-hidden="true">
+    <svg class="ring" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="99" fill="none" stroke="currentColor" stroke-width="0.6"/>
+      <circle cx="100" cy="100" r="82" fill="none" stroke="currentColor" stroke-width="0.4"/>
+      <circle cx="100" cy="100" r="65" fill="none" stroke="currentColor" stroke-width="0.3"/>
+      <circle cx="100" cy="100" r="48" fill="none" stroke="currentColor" stroke-width="0.25"/>
+    </svg>
+    <svg class="ring-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="99" fill="none" stroke="currentColor" stroke-width="0.4"/>
+    </svg>
+    <svg class="ring-3" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="99" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="75" fill="none" stroke="currentColor" stroke-width="0.35"/>
+      <circle cx="100" cy="100" r="55" fill="none" stroke="currentColor" stroke-width="0.25"/>
+      <line x1="100" y1="0" x2="100" y2="200" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 4"/>
+      <line x1="0" y1="100" x2="200" y2="100" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 4"/>
+    </svg>
+    <svg class="arc" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 0 100 A 100 100 0 0 1 200 100" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="currentColor" stroke-width="0.4"/>
+      <circle cx="100" cy="100" r="40" fill="none" stroke="currentColor" stroke-width="0.3"/>
+    </svg>
+    <svg class="compass" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="95" fill="none" stroke="currentColor" stroke-width="0.6"/>
+      <circle cx="100" cy="100" r="70" fill="none" stroke="currentColor" stroke-width="0.4"/>
+      <line x1="100" y1="5" x2="100" y2="195" stroke="currentColor" stroke-width="0.4"/>
+      <line x1="5" y1="100" x2="195" y2="100" stroke="currentColor" stroke-width="0.4"/>
+      <line x1="29" y1="29" x2="171" y2="171" stroke="currentColor" stroke-width="0.3"/>
+      <line x1="171" y1="29" x2="29" y2="171" stroke="currentColor" stroke-width="0.3"/>
+      <circle cx="100" cy="100" r="3" fill="currentColor"/>
+    </svg>
+    <svg class="blueprint" viewBox="0 0 1000 1000" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="820" x2="1000" y2="180" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 8"/>
+      <line x1="0" y1="880" x2="1000" y2="240" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1 6"/>
+    </svg>
+    <svg class="diamond" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="15" width="70" height="70" transform="rotate(45 50 50)" fill="none" stroke="currentColor" stroke-width="0.6"/>
+      <rect x="28" y="28" width="44" height="44" transform="rotate(45 50 50)" fill="none" stroke="currentColor" stroke-width="0.4"/>
+      <circle cx="50" cy="50" r="3" fill="currentColor"/>
+    </svg>
+    <div class="ticks"></div>
+    <svg class="star" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,4 61,38 96,38 68,59 79,93 50,72 21,93 32,59 4,38 39,38"
+        fill="none" stroke="currentColor" stroke-width="0.7"/>
+      <circle cx="50" cy="50" r="34" fill="none" stroke="currentColor" stroke-width="0.3"/>
+    </svg>
+    <svg class="arabesque" viewBox="0 0 540 340" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 10 320 Q 180 -40 530 60" fill="none" stroke="currentColor" stroke-width="0.7"/>
+      <path d="M 10 330 Q 200 0 530 80" fill="none" stroke="currentColor" stroke-width="0.4" stroke-dasharray="2 6"/>
+      <circle cx="10" cy="320" r="3" fill="currentColor"/>
+      <circle cx="530" cy="60" r="3" fill="currentColor"/>
+    </svg>
+    <svg class="protractor" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 10 110 A 90 90 0 0 1 190 110" fill="none" stroke="currentColor" stroke-width="0.6"/>
+      <path d="M 30 110 A 70 70 0 0 1 170 110" fill="none" stroke="currentColor" stroke-width="0.4"/>
+      <path d="M 50 110 A 50 50 0 0 1 150 110" fill="none" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 3"/>
+      <line x1="100" y1="110" x2="100" y2="15" stroke="currentColor" stroke-width="0.5"/>
+      <line x1="100" y1="110" x2="40" y2="35" stroke="currentColor" stroke-width="0.3"/>
+      <line x1="100" y1="110" x2="160" y2="35" stroke="currentColor" stroke-width="0.3"/>
+      <circle cx="100" cy="110" r="3" fill="currentColor"/>
+      <g stroke="currentColor" stroke-width="0.4">
+        <line x1="10" y1="110" x2="14" y2="110"/>
+        <line x1="32" y1="40" x2="36" y2="42"/>
+        <line x1="100" y1="20" x2="100" y2="24"/>
+        <line x1="168" y1="40" x2="164" y2="42"/>
+        <line x1="190" y1="110" x2="186" y2="110"/>
+      </g>
+    </svg>
+    <span class="glyph-2">&amp;</span>
+    <span class="glyph-3">&sect;</span>
+  </div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Beyond sustainable:<br>Adaptive.</h1>
+        <p class="lede">Sustainability survives change. Adaptability is built to thrive in it. Most institutions already hold the insight they need to adapt — in their bylaws, their data, their leaders. The work is making that knowledge visible, legible, and ready before the next disruption forces the question.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn btn-primary">
+            Turn adaptive <span class="arr">→</span>
+          </a>
+          <a href="#services" class="btn btn-ghost">
+            The services
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-portrait">
+        <img src="assets/liz-portrait.jpg" alt="Elizabeth Turner" />
+        <div class="portrait-tag">
+          <b>Elizabeth Turner</b><br>
+          Founder &amp; Principal
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-row">
+    <span>
+      Strategic Advisory <span class="star">✦</span>
+      Process Excellence <span class="star">✦</span>
+      Knowledge Management <span class="star">✦</span>
+      Change Leadership <span class="star">✦</span>
+      Innovation Capability <span class="star">✦</span>
+      AI &amp; Agentic Systems <span class="star">✦</span>
+      LLM Integration <span class="star">✦</span>
+      On‑Prem Deployment <span class="star">✦</span>
+      Safe &amp; Secure by Design <span class="star">✦</span>
+      Operational Design <span class="star">✦</span>
+    </span>
+    <span>
+      Strategic Advisory <span class="star">✦</span>
+      Process Excellence <span class="star">✦</span>
+      Knowledge Management <span class="star">✦</span>
+      Change Leadership <span class="star">✦</span>
+      Innovation Capability <span class="star">✦</span>
+      AI &amp; Agentic Systems <span class="star">✦</span>
+      LLM Integration <span class="star">✦</span>
+      On‑Prem Deployment <span class="star">✦</span>
+      Safe &amp; Secure by Design <span class="star">✦</span>
+      Operational Design <span class="star">✦</span>
+    </span>
+  </div>
+</div>
+
+<!-- PRACTICE -->
+<section class="practice" id="practice" data-screen-label="02 Practice">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">
+        <span class="eyebrow"><span class="dot"></span>The practice</span>
+      </div>
+      <h2>A boutique advisory built for real and recurrent change.</h2>
+    </div>
+
+    <div class="practice-grid">
+      <p class="practice-lead">Turner Adaptive Strategies is built for the work that doesn't fit a slide deck — the kind that touches systems, people, and unspoken rules at the same time.</p>
+      <div>
+        <p>Two decades inside complex, regulated organizations taught me that the difference between institutions that move and ones that stall is rarely strategy. It's whether knowledge is visible, legible, and ready before the next disruption forces the question.</p>
+        <p>I'm engaged when leadership intent has outpaced operational reality, when the knowledge that should guide decisions is stuck in bylaws no one sees, in data no one queries, or in the experience of leaders no one has properly onboarded.</p>
+        <p>The work is senior and hands-on. What you get is strategic clarity, operational discipline, and the fortitude to design change that holds.</p>
+      </div>
+    </div>
+
+    <dl class="creds">
+      <div>
+        <dt>Engagement model</dt>
+        <dd>Hourly or<br>by retainer</dd>
+      </div>
+      <div>
+        <dt>Signature offerings</dt>
+        <dd>Knowledge · Data discovery<br>· Culture · Exec coaching</dd>
+      </div>
+      <div>
+        <dt>Sectors</dt>
+        <dd>Mission-driven<br>organizations</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services" data-screen-label="03 Services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">
+        <span class="eyebrow"><span class="dot"></span>Services</span>
+      </div>
+      <h2>Four signature engagements,<br>and the <em>work that follows</em>.</h2>
+    </div>
+
+    <div class="services-list">
+      <div class="svc">
+        <div class="n">i.</div>
+        <div>
+          <h3>Knowledge Audit</h3>
+          <div class="tags">Bylaws · Playbooks · Continuity</div>
+        </div>
+        <p>A structured assessment of how your organization creates, shares, and retains knowledge — spanning core documents, program playbooks, and the connections between teams. The result is a tailored strategy that identifies critical continuity risks and closes the knowledge gaps that matter most.</p>
+        <!-- <div class="arrow">→</div> -->
+      </div>
+      <div class="svc">
+        <div class="n">ii.</div>
+        <div>
+          <h3>Data Discovery Workshop</h3>
+          <div class="tags">Impact · Donor Landscape · Market Funnel</div>
+        </div>
+        <p>An intensive that gets underneath the strategic layer to the systems already collecting your most valuable evidence — program impact, donor behavior, market signal. Output: the questions your data can answer, and the ones it can't yet.</p>
+        <!-- <div class="arrow">→</div> -->
+      </div>
+      <div class="svc">
+        <div class="n">iii.</div>
+        <div>
+          <h3>Culture Audit</h3>
+          <div class="tags">Collaboration · Unspoken Rules · Volunteer Retention</div>
+        </div>
+        <p>An honest assessment of how the organization actually behaves — collaboration patterns, the unspoken rules that override the written ones, and the conditions that keep volunteers and staff invested. Output: where culture is helping the mission, and where it's quietly eroding it.</p>
+        <!-- <div class="arrow">→</div> -->
+      </div>
+      <div class="svc">
+        <div class="n">iv.</div>
+        <div>
+          <h3>Executive Onboarding &amp; Coaching</h3>
+          <div class="tags">Context · Public Conflict · Mission to Ops</div>
+        </div>
+        <p>Personalized development for incoming executives and directors: building real contextual fluency, navigating conflict in the public eye, and translating mission and vision into operational decisions that hold up under scrutiny.</p>
+        <!-- <div class="arrow">→</div> -->
+      </div>
+      <div class="svc">
+        <div class="n">v.</div>
+        <div>
+          <h3>Advisory Engagements</h3>
+          <div class="tags">Strategy · Process · Change · AI Readiness</div>
+        </div>
+        <p>Where the work doesn't fit a predefined offering — standing advisory on strategic reinvention, BPMN and process design, change leadership, AI and knowledge-work readiness, or the conversations that don't have a name yet.</p>
+        <!-- <div class="arrow">→</div> -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach" data-screen-label="04 Approach">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">
+        <span class="eyebrow"><span class="dot"></span>The approach</span>
+      </div>
+      <h2>Three commitments.<br>Every <em>engagement</em>.</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="num">i.</div>
+        <h4>Clarity before motion</h4>
+        <p>Before recommendations, I map what is — the systems, incentives, and unspoken rules that produced today.</p>
+        <div class="meta">Diagnose · Define · Align</div>
+      </div>
+      <div class="pillar">
+        <div class="num">ii.</div>
+        <h4>Structure over slogans</h4>
+        <p>Visions are easy. Repeatable systems are hard. I leave behind frameworks the organization can operate.</p>
+        <div class="meta">Design · Document · Deploy</div>
+      </div>
+      <div class="pillar">
+        <div class="num">iii.</div>
+        <h4>People in the architecture</h4>
+        <p>Cognitive load, psychological safety, and adoption are not soft — they are operational constraints.</p>
+        <div class="meta">Adopt · Adapt · Sustain</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPEAKING -->
+<section class="speaking" id="speaking" data-screen-label="05 Speaking">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">
+        <span class="eyebrow"><span class="dot"></span>On the record</span>
+      </div>
+      <h2>The practice<br>on the <em>record</em>.</h2>
+    </div>
+
+    <div class="speak-creds">
+      <div><span class="c-num"><em>6</em>×</span><span class="c-lbl">KMWorld &amp; BTOES APPEARANCES</span></div>
+      <div><span class="c-num smcp">Smithsonian</span><span class="c-lbl">Appointee to the IFLA Knowledge<br>Management Section · 8 yrs</span></div>
+      <div><span class="c-num"><em>20</em> yrs</span><span class="c-lbl">Experience in<br>complex industries</span></div>
+    </div>
+
+    <div class="speak-grid">
+      <div class="talk featured">
+        <div class="venue"><span class="smcp">BTOES</span> · Enterprise Architecture Live</div>
+        <h4>Visualizing Change: Process Modeling to Tell the Story</h4>
+        <p>Process models as a storytelling tool, aligning technical and non-technical stakeholders around a shared narrative for change.</p>
+        <div class="meta"><span>Keynote</span><span>45 min</span><span>Recorded</span></div>
+      </div>
+      <div class="talk">
+        <div class="venue"><span class="smcp">BTOES</span> · Financial Services Live</div>
+        <h4>Connect the Dots with Business Process Documentation</h4>
+        <p>Documentation reframed — not a compliance artifact, but a living asset connecting systems, workflows, and decisions.</p>
+        <div class="meta"><span>Conference Talk</span><span>40 min</span></div>
+      </div>
+      <div class="talk">
+        <div class="venue"><span class="smcp">KMWorld</span> · Conference Series</div>
+        <h4>Process Modeling for Knowledge-Driven Organizations</h4>
+        <p>Where knowledge management meets process design — visual practices that let knowledge flow through the organization.</p>
+        <div class="meta"><span>Multi-year</span><span>3 sessions</span></div>
+      </div>
+      <div class="talk">
+        <div class="venue"><span class="smcp">IFLA</span> · KM Section, International</div>
+        <h4>The Future of Knowledge Work in Digital Environments</h4>
+        <p>Smithsonian-appointed delegate sessions on KM as a strategic partner in transformation and the future of knowledge work.</p>
+        <div class="meta"><span>International</span><span>Multi-year</span></div>
+      </div>
+    </div>
+
+    <div class="upcoming">
+      <div>
+        <div class="label">◐ &nbsp; Coming soon</div>
+        <h3>KMWorld 2026</h3>
+      </div>
+      <div class="upcoming-sessions">
+        <div class="session">
+          <div class="ses-meta">Lightning · 20 min</div>
+          <h5>Voluntary AI Engagement: When Curiosity Leads</h5>
+        </div>
+        <div class="session">
+          <div class="ses-meta">Talk · 1 hr</div>
+          <h5>AI Readiness &amp; Workforce Upskilling</h5>
+        </div>
+        <div class="session">
+          <div class="ses-meta">Workshop · 2.5 hr</div>
+          <h5>Inside the Mind of Change</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section class="topics" id="topics" data-screen-label="06 Topics">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">
+        <span class="eyebrow"><span class="dot"></span>Most-requested topics</span>
+      </div>
+      <h2>What I'm<br>brought in <em>for</em>.</h2>
+    </div>
+    <div class="topic-cols">
+      <ul>
+        <li><span class="n">i.</span>Process Modeling &amp; <span class="smcp">BPMN</span> for Modern Organizations</li>
+        <li><span class="n">ii.</span>Knowledge Management in the Age of AI</li>
+        <li><span class="n">iii.</span>Human-Centered Change Leadership</li>
+        <li><span class="n">iv.</span>Innovation Capability-Building</li>
+        <li><span class="n">v.</span>Visual Communication for Transformation Leaders</li>
+        <li><span class="n">vi.</span>Designing Documentation That Actually Gets Used</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact" data-screen-label="07 Contact">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>Begin a conversation</span>
+    <h2>Begin with what's<br>actually <em>at stake</em>.</h2>
+
+    <div class="contact-grid">
+      <div>
+        <p class="lede">Engagements begin with a real conversation — about the situation in front of you, the constraints you can't say out loud, and what success would look like a year from now. Introductory calls are 30 minutes and held in confidence.</p>
+        <dl class="contact-meta">
+          <div>
+            <dt>Direct</dt>
+            <dd><a href="mailto:hello@turn-adaptive.com">hello@turn-adaptive.com</a></dd>
+          </div>
+          <div>
+            <dt>Online</dt>
+            <dd><a href="https://turn-adaptive.com">turn-adaptive.com</a></dd>
+          </div>
+          <div>
+            <dt>Engagements</dt>
+            <dd>Limited · Fort Worth<br>or remote</dd>
+          </div>
+        </dl>
+      </div>
+
+      <form class="contact-form" id="cf" action="https://formspree.io/f/your-form-id" method="POST">
+        <div id="cf-fields">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" type="text" name="name" required />
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" name="email" required />
+          <label for="cf-org">Organization</label>
+          <input id="cf-org" type="text" name="org" />
+          <label for="cf-topic">What you'd like to discuss</label>
+          <select id="cf-topic" name="topic">
+            <option>Knowledge Audit</option>
+            <option>Data Discovery Workshop</option>
+            <option>Culture Audit</option>
+            <option>Executive Onboarding &amp; Coaching</option>
+            <option>Advisory Engagement</option>
+            <option>Speaking or Workshop</option>
+            <option>Something else</option>
+          </select>
+          <label for="cf-msg">Brief context</label>
+          <textarea id="cf-msg" name="msg" placeholder="A few sentences is plenty."></textarea>
+          <button type="submit">Send →</button>
+        </div>
+        <div class="sent" id="cf-sent" style="display:none">
+          Thank you. I'll reply within two business days.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>© MMXXVI · Turner Adaptive Strategies, LLC</span>
+    <span>Strategy <span class="star">✦</span> Process <span class="star">✦</span> Knowledge <span class="star">✦</span> People</span>
+    <span>turn-adaptive.com</span>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav background change on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, { passive: true });
+
+  // Smooth-scroll anchors with offset for sticky nav
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        e.preventDefault();
+        window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Contact form: keep the optimistic confirmation, but only after a real submit succeeds.
+  // To wire up: replace the form's `action` URL with your Formspree / Netlify / etc. endpoint.
+  // Until then, we fall back to showing the confirmation locally so the form still feels alive.
+  const form = document.getElementById('cf');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const action = form.getAttribute('action') || '';
+    const showSent = () => {
+      document.getElementById('cf-fields').style.display = 'none';
+      document.getElementById('cf-sent').style.display = 'block';
+    };
+    if (!action || action.includes('your-form-id')) {
+      // No endpoint configured yet — show confirmation but log so the operator knows.
+      console.warn('Contact form: no submit endpoint configured. Update form action to enable real delivery.');
+      showSent();
+      return;
+    }
+    try {
+      const res = await fetch(action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) showSent();
+      else alert('Something went wrong. Please email hello@turn-adaptive.com directly.');
+    } catch {
+      alert('Network error. Please email hello@turn-adaptive.com directly.');
+    }
+  });
+</script>
+
+</body>
+</html>
