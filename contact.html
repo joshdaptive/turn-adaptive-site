@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact | Turner Adaptive Strategies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JQ4S57N02X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JQ4S57N02X');
+</script>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="wrap nav-row">
+    <a href="index.html" class="brand" aria-label="Turner Adaptive Strategies">
+      <span class="wordmark">
+        <span class="top">Turner <em>Adaptive</em> Strategies</span>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="practice.html">Practice</a>
+      <a href="services.html">Services</a>
+      <a href="approach.html">Approach</a>
+      <a href="speaking.html">Speaking</a>
+      <a href="topics.html">Topics</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- CONTACT -->
+<section class="contact" id="contact" data-screen-label="07 Contact">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>Begin a conversation</span>
+    <h2>Begin with what's<br>actually <em>at stake</em>.</h2>
+
+    <div class="contact-grid">
+      <div>
+          <p class="lede">Engagements begin with a straightforward conversation about the situation you’re facing, the constraints shaping it, and what success could realistically look like a year from now. Introductory calls are 30 minutes and confidential.</p>     
+        <dl class="contact-meta">
+          <div>
+            <dt>Direct</dt>
+            <dd><a href="mailto:liz@turn-adaptive.com">liz@turn-adaptive.com</a></dd>
+          </div>
+          <div>
+            <dt>Online</dt>
+            <dd><a href="https://turn-adaptive.com">turn-adaptive.com</a></dd>
+          </div>
+          <div>
+            <dt>Engagements</dt>
+            <dd>Limited · Fort Worth<br>or remote</dd>
+          </div>
+        </dl>
+      </div>
+
+      <form class="contact-form" id="cf" action="https://formspree.io/f/your-form-id" method="POST">
+        <div id="cf-fields">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" type="text" name="name" required />
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" name="email" required />
+          <label for="cf-org">Organization</label>
+          <input id="cf-org" type="text" name="org" />
+          <label for="cf-topic">What you'd like to discuss</label>
+          <select id="cf-topic" name="topic">
+            <option>Knowledge Audit</option>
+            <option>Data Discovery Workshop</option>
+            <option>Culture Audit</option>
+            <option>Executive Onboarding &amp; Coaching</option>
+            <option>Advisory Engagement</option>
+            <option>Speaking or Workshop</option>
+            <option>Something else</option>
+          </select>
+          <label for="cf-msg">Brief context</label>
+          <textarea id="cf-msg" name="msg" placeholder="A few sentences is plenty."></textarea>
+          <button type="submit">Send →</button>
+        </div>
+        <div class="sent" id="cf-sent" style="display:none">
+          Thank you. I'll reply within two business days.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <span>© MMXXVI · Turner Adaptive Strategies, LLC</span>
+    <span>Strategy <span class="star">✦</span> Process <span class="star">✦</span> Knowledge <span class="star">✦</span> People</span>
+    <span>turn-adaptive.com</span>
+  </div>
+</footer>
+
+<script>
+  // Sticky nav background change on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  }, { passive: true });
+</script>
+<script>
+  // Contact form: keep the optimistic confirmation, but only after a real submit succeeds.
+  // To wire up: replace the form's `action` URL with your Formspree / Netlify / etc. endpoint.
+  // Until then, we fall back to showing the confirmation locally so the form still feels alive.
+  const form = document.getElementById('cf');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const action = form.getAttribute('action') || '';
+    const showSent = () => {
+      document.getElementById('cf-fields').style.display = 'none';
+      document.getElementById('cf-sent').style.display = 'block';
+    };
+    if (!action || action.includes('your-form-id')) {
+      // No endpoint configured yet — show confirmation but log so the operator knows.
+      console.warn('Contact form: no submit endpoint configured. Update form action to enable real delivery.');
+      showSent();
+      return;
+    }
+    try {
+      const res = await fetch(action, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) showSent();
+      else alert('Something went wrong. Please email liz@turn-adaptive.com directly.');
+    } catch {
+      alert('Network error. Please email liz@turn-adaptive.com directly.');
+    }
+  });
+</script>
+
+</body>
+</html>
