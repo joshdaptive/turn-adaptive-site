@@ -21,96 +21,67 @@
   gtag('config', 'G-JQ4S57N02X');
 </script>
 <style>
-  /* ------------------------------------------------------------------
-     Contact page overrides. Colors are sampled from the site — swap in
-     the real tokens from styles.css if they differ.
-     ------------------------------------------------------------------ */
   :root {
     --c-ink:  #1C1C18;
     --c-deep: #2E3C30;   /* nav green */
-    --c-rule: rgba(28,28,24,0.16);
   }
 
-  /* Two columns: reference details left, the single action right.
-     Overrides the inherited .contact-grid so the meta list stops
-     behaving like a three-column table. */
-  .contact .contact-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: clamp(3rem, 7vw, 7rem);
-    align-items: start;
+  /* Neutralise any inherited grid on this section. */
+  .contact .contact-grid { display: block; }
+
+  .contact-stack {
+    max-width: 34rem;                 /* holds the measure at ~60–70 chars */
+    margin-inline: 0;                 /* left-aligned with the site grid */
+    padding-block: clamp(4rem, 12vh, 9rem);
   }
 
-  /* Meta list: stacked rows with hairline rules, label left, value right. */
-  .contact .contact-meta {
-    display: block;
-    margin: 0;
-    border-top: 1px solid var(--c-rule);
-  }
-  .contact .contact-meta > div {
-    display: grid;
-    grid-template-columns: 8.5rem minmax(0, 1fr);
-    gap: 1.5rem;
-    align-items: baseline;
-    padding: 1.15rem 0;
-    border-bottom: 1px solid var(--c-rule);
-    border-left: 0;
-    border-right: 0;
-  }
-  .contact .contact-meta dt {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    opacity: 0.5;
-    margin: 0;
-  }
-  .contact .contact-meta dd {
-    margin: 0;
-    font-size: 1.05rem;
-    line-height: 1.5;
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
-  /* ---- Booking action ---- */
-  .booking {
-    padding-top: 0.25rem;
-  }
   .booking-line {
-    font-size: 1.05rem;
-    line-height: 1.65;
-    max-width: 34ch;
-    margin: 0 0 2.25rem;
+    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
+    line-height: 1.6;
+    font-weight: 300;
+    margin: 0 0 clamp(2.5rem, 6vw, 4rem);
+    text-wrap: pretty;
   }
+
   .book-btn {
     display: inline-flex;
     align-items: baseline;
-    gap: 0.85rem;
+    gap: 0.7rem;
+    max-width: 100%;
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
     font-weight: 400;
-    line-height: 1;
+    line-height: 1.05;
     color: var(--c-ink);
     text-decoration: none;
     background: none;
     border: 0;
     border-bottom: 1px solid var(--c-ink);
-    padding: 0 0 0.4rem;
+    padding: 0 0 0.35rem;
     cursor: pointer;
+    text-align: left;
     transition: color .25s ease, border-color .25s ease;
   }
   .book-btn .arrow {
     font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.5em;
-    transform: translateY(-0.35em);
+    font-size: 0.42em;
+    transform: translateY(-0.4em);
     transition: transform .25s ease;
+    flex: none;
   }
   .book-btn:hover,
-  .book-btn:focus-visible {
-    color: var(--c-deep);
-    border-color: var(--c-deep);
-  }
+  .book-btn:focus-visible { color: var(--c-deep); border-color: var(--c-deep); }
   .book-btn:hover .arrow,
-  .book-btn:focus-visible .arrow { transform: translate(0.35em, -0.35em); }
+  .book-btn:focus-visible .arrow { transform: translate(0.35em, -0.4em); }
   .book-btn:focus-visible { outline: 2px solid var(--c-deep); outline-offset: 6px; }
 
   .booking-note {
@@ -119,17 +90,11 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     opacity: 0.5;
-    margin: 1.5rem 0 0;
+    margin: 1.4rem 0 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .book-btn, .book-btn .arrow { transition: none; }
-  }
-
-  @media (max-width: 820px) {
-    .contact .contact-grid { grid-template-columns: 1fr; gap: 3.25rem; }
-    .booking { order: -1; }               /* action first on small screens */
-    .contact .contact-meta > div { grid-template-columns: 7rem minmax(0,1fr); }
   }
 </style>
 </head>
@@ -159,40 +124,18 @@
 <!-- CONTACT -->
 <section class="contact" id="contact" data-screen-label="07 Contact">
   <div class="wrap">
-    <h2>Begin with what's<br>actually <em>at stake</em>.</h2>
+    <!-- Heading kept for document structure and screen readers only. -->
+    <h2 class="visually-hidden">Contact</h2>
 
-    <div class="contact-grid">
-      <div>
-        <dl class="contact-meta">
-          <div>
-            <dt>Direct</dt>
-            <dd><a href="mailto:liz@turn-adaptive.com">liz@turn-adaptive.com</a></dd>
-          </div>
-          <div>
-            <dt>Online</dt>
-            <dd><a href="https://turn-adaptive.com">turn-adaptive.com</a></dd>
-          </div>
-          <div>
-            <dt>Engagements</dt>
-            <dd>Limited · Fort Worth or remote</dd>
-          </div>
-          <div>
-            <dt>First call</dt>
-            <dd>30 minutes · confidential</dd>
-          </div>
-        </dl>
-      </div>
+    <div class="contact-stack">
+      <p class="booking-line">The first conversation covers the situation you're facing, the constraints shaping it, and what success could realistically look like a year from now.</p>
 
-      <div class="booking">
-        <p class="booking-line">The first conversation covers the situation you're facing, the constraints shaping it, and what success could realistically look like a year from now.</p>
+      <!-- Calendly popup. Confirm the event slug in your Calendly account. -->
+      <button type="button" class="book-btn" id="book">
+        Find a time<span class="arrow">→</span>
+      </button>
 
-        <!-- Calendly popup. Confirm the event slug in your Calendly account. -->
-        <button type="button" class="book-btn" id="book">
-          Find a time<span class="arrow">→</span>
-        </button>
-
-        <p class="booking-note">Opens a scheduling window</p>
-      </div>
+      <p class="booking-note">30 minutes · confidential</p>
     </div>
   </div>
 </section>
@@ -216,8 +159,8 @@
 
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 <script>
-  // Calendly popup. If the script hasn't loaded yet (slow network, blocker),
-  // fall back to opening the scheduling page in a new tab rather than failing.
+  // Calendly popup. If the script hasn't loaded (slow network, blocker),
+  // open the scheduling page in a new tab rather than doing nothing.
   const CALENDLY_URL = 'https://calendly.com/turn-adaptive/30min?hide_event_type_details=1&hide_gdpr_banner=1';
   document.getElementById('book').addEventListener('click', () => {
     if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
