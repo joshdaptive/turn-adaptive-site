@@ -6,6 +6,7 @@
 <title>Contact | Turner Adaptive Strategies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://assets.calendly.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 <!-- Google tag (gtag.js) -->
@@ -17,6 +18,33 @@
 
   gtag('config', 'G-JQ4S57N02X');
 </script>
+<style>
+  /* Scheduler panel — replaces the old contact form in the contact-grid */
+  .scheduler { min-width: 0; }
+  .scheduler .scheduler-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin: 0 0 0.9rem;
+  }
+  .calendly-inline-widget {
+    min-width: 320px;
+    width: 100%;
+    height: 700px;
+  }
+  .scheduler-fallback {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.8;
+    margin: 0.9rem 0 0;
+  }
+  /* Calendly's month view needs more vertical room on narrow screens */
+  @media (max-width: 700px) {
+    .calendly-inline-widget { height: 940px; }
+  }
+</style>
 </head>
 <body>
 
@@ -66,32 +94,20 @@
         </dl>
       </div>
 
-      <form class="contact-form" id="cf" action="https://formspree.io/f/your-form-id" method="POST">
-        <div id="cf-fields">
-          <label for="cf-name">Your name</label>
-          <input id="cf-name" type="text" name="name" required />
-          <label for="cf-email">Email</label>
-          <input id="cf-email" type="email" name="email" required />
-          <label for="cf-org">Organization</label>
-          <input id="cf-org" type="text" name="org" />
-          <label for="cf-topic">What you'd like to discuss</label>
-          <select id="cf-topic" name="topic">
-            <option>Knowledge Audit</option>
-            <option>Data Discovery Workshop</option>
-            <option>Culture Audit</option>
-            <option>Executive Onboarding &amp; Coaching</option>
-            <option>Advisory Engagement</option>
-            <option>Speaking or Workshop</option>
-            <option>Something else</option>
-          </select>
-          <label for="cf-msg">Brief context</label>
-          <textarea id="cf-msg" name="msg" placeholder="A few sentences is plenty."></textarea>
-          <button type="submit">Send →</button>
-        </div>
-        <div class="sent" id="cf-sent" style="display:none">
-          Thank you. I'll reply within two business days.
-        </div>
-      </form>
+      <div class="scheduler">
+        <p class="scheduler-label">Pick a time</p>
+        <!-- Calendly inline widget begin -->
+        <!-- Optional theming: append &background_color=faf8f4&text_color=1a1a1a&primary_color=8a1c1c
+             to data-url once you've matched them to styles.css (hex, no #). -->
+        <div class="calendly-inline-widget"
+             data-url="https://calendly.com/turn-adaptive?hide_gdpr_banner=1"></div>
+        <!-- Calendly inline widget end -->
+        <noscript>
+          <p class="scheduler-fallback">Scheduling needs JavaScript.
+            <a href="https://calendly.com/turn-adaptive">Open the calendar in a new tab</a>,
+            or email <a href="mailto:liz@turn-adaptive.com">liz@turn-adaptive.com</a>.</p>
+        </noscript>
+      </div>
     </div>
   </div>
 </section>
@@ -112,37 +128,7 @@
     nav.classList.toggle('scrolled', window.scrollY > 12);
   }, { passive: true });
 </script>
-<script>
-  // Contact form: keep the optimistic confirmation, but only after a real submit succeeds.
-  // To wire up: replace the form's `action` URL with your Formspree / Netlify / etc. endpoint.
-  // Until then, we fall back to showing the confirmation locally so the form still feels alive.
-  const form = document.getElementById('cf');
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const action = form.getAttribute('action') || '';
-    const showSent = () => {
-      document.getElementById('cf-fields').style.display = 'none';
-      document.getElementById('cf-sent').style.display = 'block';
-    };
-    if (!action || action.includes('your-form-id')) {
-      // No endpoint configured yet — show confirmation but log so the operator knows.
-      console.warn('Contact form: no submit endpoint configured. Update form action to enable real delivery.');
-      showSent();
-      return;
-    }
-    try {
-      const res = await fetch(action, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      });
-      if (res.ok) showSent();
-      else alert('Something went wrong. Please email liz@turn-adaptive.com directly.');
-    } catch {
-      alert('Network error. Please email liz@turn-adaptive.com directly.');
-    }
-  });
-</script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 </body>
 </html>
