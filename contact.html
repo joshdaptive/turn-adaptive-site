@@ -9,6 +9,8 @@
 <link rel="preconnect" href="https://assets.calendly.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<!-- Calendly popup styles -->
+<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQ4S57N02X"></script>
 <script>
@@ -19,49 +21,115 @@
   gtag('config', 'G-JQ4S57N02X');
 </script>
 <style>
-  /* --- Scheduler panel -------------------------------------------------
-     Colors below are eyeballed from the site. Replace with the exact
-     tokens in styles.css so the iframe and the page share one palette. */
+  /* ------------------------------------------------------------------
+     Contact page overrides. Colors are sampled from the site — swap in
+     the real tokens from styles.css if they differ.
+     ------------------------------------------------------------------ */
   :root {
-    --sched-paper: #EDE5D6;   /* page cream */
-    --sched-ink:   #1C1C18;   /* body text */
-    --sched-deep:  #2E3C30;   /* nav green */
-    --sched-rule:  rgba(28,28,24,0.18);
+    --c-ink:  #1C1C18;
+    --c-deep: #2E3C30;   /* nav green */
+    --c-rule: rgba(28,28,24,0.16);
   }
 
-  .scheduler { min-width: 0; }
+  /* Two columns: reference details left, the single action right.
+     Overrides the inherited .contact-grid so the meta list stops
+     behaving like a three-column table. */
+  .contact .contact-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(3rem, 7vw, 7rem);
+    align-items: start;
+  }
 
-  .scheduler-label {
+  /* Meta list: stacked rows with hairline rules, label left, value right. */
+  .contact .contact-meta {
+    display: block;
+    margin: 0;
+    border-top: 1px solid var(--c-rule);
+  }
+  .contact .contact-meta > div {
+    display: grid;
+    grid-template-columns: 8.5rem minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: baseline;
+    padding: 1.15rem 0;
+    border-bottom: 1px solid var(--c-rule);
+    border-left: 0;
+    border-right: 0;
+  }
+  .contact .contact-meta dt {
     font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.68rem;
+    font-size: 0.66rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--sched-ink);
-    opacity: 0.55;
-    margin: 0 0 1.1rem;
-    padding-bottom: 0.9rem;
-    border-bottom: 1px solid var(--sched-rule);
+    opacity: 0.5;
+    margin: 0;
+  }
+  .contact .contact-meta dd {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
   }
 
-  /* The iframe background is set to the page cream via URL params, so the
-     widget dissolves into the page instead of sitting on it as a card. */
-  .calendly-inline-widget {
-    min-width: 320px;
-    width: 100%;
-    height: 660px;
-    margin-left: -14px;   /* cancels Calendly's internal gutter, aligns
-                             the calendar's left edge to the label above */
+  /* ---- Booking action ---- */
+  .booking {
+    padding-top: 0.25rem;
+  }
+  .booking-line {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    max-width: 34ch;
+    margin: 0 0 2.25rem;
+  }
+  .book-btn {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--c-ink);
+    text-decoration: none;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--c-ink);
+    padding: 0 0 0.4rem;
+    cursor: pointer;
+    transition: color .25s ease, border-color .25s ease;
+  }
+  .book-btn .arrow {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.5em;
+    transform: translateY(-0.35em);
+    transition: transform .25s ease;
+  }
+  .book-btn:hover,
+  .book-btn:focus-visible {
+    color: var(--c-deep);
+    border-color: var(--c-deep);
+  }
+  .book-btn:hover .arrow,
+  .book-btn:focus-visible .arrow { transform: translate(0.35em, -0.35em); }
+  .book-btn:focus-visible { outline: 2px solid var(--c-deep); outline-offset: 6px; }
+
+  .booking-note {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin: 1.5rem 0 0;
   }
 
-  .scheduler-fallback {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    opacity: 0.8;
-    margin: 0.9rem 0 0;
+  @media (prefers-reduced-motion: reduce) {
+    .book-btn, .book-btn .arrow { transition: none; }
   }
 
-  @media (max-width: 700px) {
-    .calendly-inline-widget { height: 1000px; margin-left: 0; }
+  @media (max-width: 820px) {
+    .contact .contact-grid { grid-template-columns: 1fr; gap: 3.25rem; }
+    .booking { order: -1; }               /* action first on small screens */
+    .contact .contact-meta > div { grid-template-columns: 7rem minmax(0,1fr); }
   }
 </style>
 </head>
@@ -91,12 +159,10 @@
 <!-- CONTACT -->
 <section class="contact" id="contact" data-screen-label="07 Contact">
   <div class="wrap">
-    <span class="eyebrow"><span class="dot"></span>Begin a conversation</span>
     <h2>Begin with what's<br>actually <em>at stake</em>.</h2>
 
     <div class="contact-grid">
       <div>
-          <p class="lede">Engagements begin with a straightforward conversation about the situation you’re facing, the constraints shaping it, and what success could realistically look like a year from now. Introductory calls are 30 minutes and confidential.</p>     
         <dl class="contact-meta">
           <div>
             <dt>Direct</dt>
@@ -108,24 +174,24 @@
           </div>
           <div>
             <dt>Engagements</dt>
-            <dd>Limited · Fort Worth<br>or remote</dd>
+            <dd>Limited · Fort Worth or remote</dd>
+          </div>
+          <div>
+            <dt>First call</dt>
+            <dd>30 minutes · confidential</dd>
           </div>
         </dl>
       </div>
 
-      <div class="scheduler">
-        <p class="scheduler-label">Pick a time</p>
-        <!-- Calendly inline widget begin -->
-        <!-- Point data-url at the EVENT TYPE, not the account root, so visitors
-             skip the profile landing page. Verify the slug in Calendly. -->
-        <div class="calendly-inline-widget"
-             data-url="https://calendly.com/turn-adaptive/30min?hide_event_type_details=1&amp;hide_gdpr_banner=1&amp;background_color=EDE5D6&amp;text_color=1C1C18&amp;primary_color=2E3C30"></div>
-        <!-- Calendly inline widget end -->
-        <noscript>
-          <p class="scheduler-fallback">Scheduling needs JavaScript.
-            <a href="https://calendly.com/turn-adaptive">Open the calendar in a new tab</a>,
-            or email <a href="mailto:liz@turn-adaptive.com">liz@turn-adaptive.com</a>.</p>
-        </noscript>
+      <div class="booking">
+        <p class="booking-line">The first conversation covers the situation you're facing, the constraints shaping it, and what success could realistically look like a year from now.</p>
+
+        <!-- Calendly popup. Confirm the event slug in your Calendly account. -->
+        <button type="button" class="book-btn" id="book">
+          Find a time<span class="arrow">→</span>
+        </button>
+
+        <p class="booking-note">Opens a scheduling window</p>
       </div>
     </div>
   </div>
@@ -147,7 +213,20 @@
     nav.classList.toggle('scrolled', window.scrollY > 12);
   }, { passive: true });
 </script>
+
 <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+<script>
+  // Calendly popup. If the script hasn't loaded yet (slow network, blocker),
+  // fall back to opening the scheduling page in a new tab rather than failing.
+  const CALENDLY_URL = 'https://calendly.com/turn-adaptive/30min?hide_event_type_details=1&hide_gdpr_banner=1';
+  document.getElementById('book').addEventListener('click', () => {
+    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
+      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
+    } else {
+      window.open(CALENDLY_URL, '_blank', 'noopener');
+    }
+  });
+</script>
 
 </body>
 </html>
