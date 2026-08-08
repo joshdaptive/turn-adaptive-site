@@ -19,30 +19,49 @@
   gtag('config', 'G-JQ4S57N02X');
 </script>
 <style>
-  /* Scheduler panel — replaces the old contact form in the contact-grid */
-  .scheduler { min-width: 0; }
-  .scheduler .scheduler-label {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    opacity: 0.65;
-    margin: 0 0 0.9rem;
+  /* --- Scheduler panel -------------------------------------------------
+     Colors below are eyeballed from the site. Replace with the exact
+     tokens in styles.css so the iframe and the page share one palette. */
+  :root {
+    --sched-paper: #EDE5D6;   /* page cream */
+    --sched-ink:   #1C1C18;   /* body text */
+    --sched-deep:  #2E3C30;   /* nav green */
+    --sched-rule:  rgba(28,28,24,0.18);
   }
+
+  .scheduler { min-width: 0; }
+
+  .scheduler-label {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--sched-ink);
+    opacity: 0.55;
+    margin: 0 0 1.1rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid var(--sched-rule);
+  }
+
+  /* The iframe background is set to the page cream via URL params, so the
+     widget dissolves into the page instead of sitting on it as a card. */
   .calendly-inline-widget {
     min-width: 320px;
     width: 100%;
-    height: 700px;
+    height: 660px;
+    margin-left: -14px;   /* cancels Calendly's internal gutter, aligns
+                             the calendar's left edge to the label above */
   }
+
   .scheduler-fallback {
     font-size: 0.9rem;
     line-height: 1.6;
     opacity: 0.8;
     margin: 0.9rem 0 0;
   }
-  /* Calendly's month view needs more vertical room on narrow screens */
+
   @media (max-width: 700px) {
-    .calendly-inline-widget { height: 940px; }
+    .calendly-inline-widget { height: 1000px; margin-left: 0; }
   }
 </style>
 </head>
@@ -97,10 +116,10 @@
       <div class="scheduler">
         <p class="scheduler-label">Pick a time</p>
         <!-- Calendly inline widget begin -->
-        <!-- Optional theming: append &background_color=faf8f4&text_color=1a1a1a&primary_color=8a1c1c
-             to data-url once you've matched them to styles.css (hex, no #). -->
+        <!-- Point data-url at the EVENT TYPE, not the account root, so visitors
+             skip the profile landing page. Verify the slug in Calendly. -->
         <div class="calendly-inline-widget"
-             data-url="https://calendly.com/turn-adaptive?hide_gdpr_banner=1"></div>
+             data-url="https://calendly.com/turn-adaptive/30min?hide_event_type_details=1&amp;hide_gdpr_banner=1&amp;background_color=EDE5D6&amp;text_color=1C1C18&amp;primary_color=2E3C30"></div>
         <!-- Calendly inline widget end -->
         <noscript>
           <p class="scheduler-fallback">Scheduling needs JavaScript.
