@@ -17,40 +17,17 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-JQ4S57N02X');
 </script>
 <style>
-  :root {
-    --c-ink:  #1C1C18;
-    --c-deep: #2E3C30;   /* nav green */
-  }
-
-  /* Neutralise any inherited grid on this section. */
-  .contact .contact-grid { display: block; }
-
-  .contact-stack {
-    max-width: 34rem;                 /* holds the measure at ~60–70 chars */
-    margin-inline: 0;                 /* left-aligned with the site grid */
-    padding-block: clamp(4rem, 12vh, 9rem);
-  }
-
-  .visually-hidden {
-    position: absolute;
-    width: 1px; height: 1px;
-    margin: -1px; padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
-  }
-
-  .booking-line {
-    font-size: clamp(1.15rem, 1rem + 0.6vw, 1.5rem);
-    line-height: 1.6;
-    font-weight: 300;
-    margin: 0 0 clamp(2.5rem, 6vw, 4rem);
-    text-wrap: pretty;
-  }
+  /* ------------------------------------------------------------------
+     Booking action only. Everything else on this page uses the existing
+     .practice / .sec-head / .creds rules from styles.css, so the type,
+     spacing and color all come from the stylesheet — no new values.
+     The button inherits currentColor rather than declaring a hex, so it
+     can't drift out of the palette.
+     ------------------------------------------------------------------ */
+  .booking { margin-top: clamp(2.5rem, 6vw, 4rem); }
 
   .book-btn {
     display: inline-flex;
@@ -61,15 +38,14 @@
     font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
     font-weight: 400;
     line-height: 1.05;
-    color: var(--c-ink);
-    text-decoration: none;
+    color: inherit;
     background: none;
     border: 0;
-    border-bottom: 1px solid var(--c-ink);
+    border-bottom: 1px solid currentColor;
     padding: 0 0 0.35rem;
     cursor: pointer;
     text-align: left;
-    transition: color .25s ease, border-color .25s ease;
+    transition: opacity .25s ease;
   }
   .book-btn .arrow {
     font-family: 'Inter', system-ui, sans-serif;
@@ -78,20 +54,9 @@
     transition: transform .25s ease;
     flex: none;
   }
-  .book-btn:hover,
-  .book-btn:focus-visible { color: var(--c-deep); border-color: var(--c-deep); }
-  .book-btn:hover .arrow,
-  .book-btn:focus-visible .arrow { transform: translate(0.35em, -0.4em); }
-  .book-btn:focus-visible { outline: 2px solid var(--c-deep); outline-offset: 6px; }
-
-  .booking-note {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
-    font-size: 0.66rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    opacity: 0.5;
-    margin: 1.4rem 0 0;
-  }
+  .book-btn:hover { opacity: 0.62; }
+  .book-btn:hover .arrow { transform: translate(0.35em, -0.4em); }
+  .book-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
 
   @media (prefers-reduced-motion: reduce) {
     .book-btn, .book-btn .arrow { transition: none; }
@@ -99,7 +64,6 @@
 </style>
 </head>
 <body>
-
 <header class="nav" id="nav">
   <div class="wrap nav-row">
     <a href="index.html" class="brand" aria-label="Turner Adaptive Strategies">
@@ -118,29 +82,43 @@
     </nav>
   </div>
 </header>
-
 <main id="top">
-
 <!-- CONTACT -->
-<section class="contact" id="contact" data-screen-label="07 Contact">
+<section class="practice" id="contact" data-screen-label="07 Contact">
   <div class="wrap">
-    <!-- Heading kept for document structure and screen readers only. -->
-    <h2 class="visually-hidden">Contact</h2>
+    <div class="sec-head">
+      <div class="kicker">
+        <span class="eyebrow"><span class="dot"></span>The first conversation</span>
+      </div>
+      <h2>Every engagement starts with thirty minutes and a real question.</h2>
+    </div>
 
-    <div class="contact-stack">
-      <p class="booking-line">The first conversation covers the situation you're facing, the constraints shaping it, and what success could realistically look like a year from now.</p>
+    <p class="practice-lead">The first conversation covers the situation you're facing, the constraints shaping it, and what success could realistically look like a year from now.</p>
 
+    <div class="booking">
       <!-- Calendly popup. Confirm the event slug in your Calendly account. -->
       <button type="button" class="book-btn" id="book">
         Find a time<span class="arrow">→</span>
       </button>
-
-      <p class="booking-note">30 minutes · confidential</p>
     </div>
+
+    <dl class="creds">
+      <div>
+        <dt>Direct</dt>
+        <dd>liz@turn-adaptive.com</dd>
+      </div>
+      <div>
+        <dt>Format</dt>
+        <dd>Thirty minutes<br>confidential</dd>
+      </div>
+      <div>
+        <dt>Engagements</dt>
+        <dd>Limited · Fort Worth<br>or remote</dd>
+      </div>
+    </dl>
   </div>
 </section>
 </main>
-
 <footer>
   <div class="wrap row">
     <span>© MMXXVI · Turner Adaptive Strategies, LLC</span>
@@ -148,7 +126,6 @@
     <span>turn-adaptive.com</span>
   </div>
 </footer>
-
 <script>
   // Sticky nav background change on scroll
   const nav = document.getElementById('nav');
@@ -170,6 +147,5 @@
     }
   });
 </script>
-
 </body>
 </html>
