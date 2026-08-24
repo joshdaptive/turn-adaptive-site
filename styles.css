@@ -575,6 +575,31 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 .contact-meta dd{margin:0;font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:400}
 .contact-meta dd a{border-bottom:1px solid var(--rule)}
 
+/* ── Booking action (contact) ────────────────────────
+   Moved out of contact.html's inline <style>. Type, spacing and color
+   all resolve from the tokens above: the serif/sans come from --serif /
+   --sans, and the button inherits currentColor rather than a hex, so it
+   can't drift out of the palette. */
+.booking{margin-top:clamp(2.5rem,6vw,4rem)}
+.book-btn{
+  display:inline-flex;align-items:baseline;gap:.7rem;max-width:100%;
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(1.9rem,1.2rem + 3vw,3rem);line-height:1.05;
+  color:inherit;background:none;border:0;border-bottom:1px solid currentColor;
+  padding:0 0 .35rem;cursor:pointer;text-align:left;
+  transition:opacity .25s ease;
+}
+.book-btn .arrow{
+  font-family:var(--sans);font-size:.42em;
+  transform:translateY(-.4em);transition:transform .25s ease;flex:none;
+}
+.book-btn:hover{opacity:.62}
+.book-btn:hover .arrow{transform:translate(.35em,-.4em)}
+.book-btn:focus-visible{outline:2px solid currentColor;outline-offset:6px}
+@media (prefers-reduced-motion:reduce){
+  .book-btn,.book-btn .arrow{transition:none}
+}
+
 /* ── Footer ──────────────────────────────────────────── */
 footer{
   background:var(--forest-deep);color:rgba(245,239,230,.6);
