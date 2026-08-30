@@ -634,6 +634,7 @@ footer .star{color:var(--peach)}
   flex:0 0 auto;
   transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
+
 .brand:hover .brand-mark{
   transform:translateY(-1px);
   border-color:rgba(232,168,124,.55);
