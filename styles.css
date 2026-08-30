@@ -609,6 +609,9 @@ footer{
 footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
 footer .star{color:var(--peach)}
 
+
+/* ── Badge ─────────────────────────────── */
+
 .brand{
   display:flex;align-items:center;
   gap:14px;
