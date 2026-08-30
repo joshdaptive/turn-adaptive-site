@@ -608,3 +608,21 @@ footer{
 }
 footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
 footer .star{color:var(--peach)}
+
+.brand{
+  display:flex;align-items:center;
+  gap:14px;                 /* was 0 — separates mark from the title */
+  color:var(--paper);line-height:1;
+}
+
+.brand-mark{
+  height:46px;
+  width:auto;
+  aspect-ratio:470 / 291;
+  padding:6px 9px;
+  background:var(--cream-warm);   /* cream chip so the mark reads on the forest nav */
+  border-radius:2px;
+  display:block;
+  flex:0 0 auto;
+}
+
