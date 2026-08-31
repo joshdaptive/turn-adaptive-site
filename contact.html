@@ -6,11 +6,12 @@
 <title>Contact | Turner Adaptive Strategies</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://assets.calendly.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
-<!-- Calendly popup styles -->
-<link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQ4S57N02X"></script>
 <script>
@@ -19,133 +20,46 @@
   gtag('js', new Date());
   gtag('config', 'G-JQ4S57N02X');
 </script>
-<style>
-  /* ------------------------------------------------------------------
-     Booking action only. Everything else on this page uses the existing
-     .practice / .sec-head / .creds rules from styles.css, so the type,
-     spacing and color all come from the stylesheet — no new values.
-     The button inherits currentColor rather than declaring a hex, so it
-     can't drift out of the palette.
-     ------------------------------------------------------------------ */
-  .booking { margin-top: clamp(2.5rem, 6vw, 4rem); }
-
-  .book-btn {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.7rem;
-    max-width: 100%;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
-    font-weight: 400;
-    line-height: 1.05;
-    color: inherit;
-    background: none;
-    border: 0;
-    border-bottom: 1px solid currentColor;
-    padding: 0 0 0.35rem;
-    cursor: pointer;
-    text-align: left;
-    transition: opacity .25s ease;
-  }
-  .book-btn .arrow {
-    font-family: 'Inter', system-ui, sans-serif;
-    font-size: 0.42em;
-    transform: translateY(-0.4em);
-    transition: transform .25s ease;
-    flex: none;
-  }
-  .book-btn:hover { opacity: 0.62; }
-  .book-btn:hover .arrow { transform: translate(0.35em, -0.4em); }
-  .book-btn:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
-
-  @media (prefers-reduced-motion: reduce) {
-    .book-btn, .book-btn .arrow { transition: none; }
-  }
-</style>
 </head>
 <body>
-<header class="nav" id="nav">
-  <div class="wrap nav-row">
-    <a href="index.html" class="brand" aria-label="Turner Adaptive Strategies">
-      <span class="wordmark">
-        <span class="top">Turner <em>Adaptive</em> Strategies</span>
-      </span>
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="practice.html">Practice</a>
-      <a href="services.html">Services</a>
-      <a href="approach.html">Approach</a>
-      <a href="speaking.html">Speaking</a>
-      <a href="topics.html">Topics</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-<main id="top">
-<!-- CONTACT -->
-<section class="practice" id="contact" data-screen-label="07 Contact">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="kicker">
-        <span class="eyebrow"><span class="dot"></span>The first conversation</span>
-      </div>
-      <h2>Every engagement starts with thirty minutes and a real question.</h2>
-    </div>
+<!-- MENU: loaded from nav.html by site-nav.js -->
+<div data-include="nav.html"></div>
 
-    <p class="practice-lead">The first conversation covers the situation you're facing, the constraints shaping it, and what success could realistically look like a year from now.</p>
+<main>
+<section class="contact" data-screen-label="Contact">
+  <div class="wrap">
+
+    <span class="eyebrow"><span class="dot"></span>Contact</span>
+    <h2>Every engagement starts with thirty minutes and <em>a real question</em>.</h2>
+
+    <p class="lede">The first conversation covers the situation you're facing, the constraints shaping it, and what success could realistically look like a year from now.</p>
 
     <div class="booking">
-      <!-- Calendly popup. Confirm the event slug in your Calendly account. -->
-      <button type="button" class="book-btn" id="book">
-        Find a time<span class="arrow">→</span>
-      </button>
+      <!-- Placeholder — point this at your scheduler (Calendly, etc.) when ready. -->
+      <a href="#" class="book-btn">Book a conversation <span class="arrow">&rarr;</span></a>
     </div>
 
-    <dl class="creds">
+    <dl class="contact-meta">
       <div>
         <dt>Direct</dt>
-        <dd>liz@turn-adaptive.com</dd>
+        <dd><a href="mailto:liz@turn-adaptive.com">liz@turn-adaptive.com</a></dd>
       </div>
       <div>
         <dt>Format</dt>
-        <dd>Thirty minutes<br>confidential</dd>
+        <dd>Thirty minutes<br>Confidential</dd>
       </div>
       <div>
         <dt>Engagements</dt>
-        <dd>Limited · Fort Worth<br>or remote</dd>
+        <dd>Limited &middot; Fort Worth<br>or remote</dd>
       </div>
     </dl>
+
   </div>
 </section>
 </main>
-<footer>
-  <div class="wrap row">
-    <span>© MMXXVI · Turner Adaptive Strategies, LLC</span>
-    <span>Strategy <span class="star">✦</span> Process <span class="star">✦</span> Knowledge <span class="star">✦</span> People</span>
-    <span>turn-adaptive.com</span>
-  </div>
-</footer>
-<script>
-  // Sticky nav background change on scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 12);
-  }, { passive: true });
-</script>
 
-<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<script>
-  // Calendly popup. If the script hasn't loaded (slow network, blocker),
-  // open the scheduling page in a new tab rather than doing nothing.
-  const CALENDLY_URL = 'https://calendly.com/turn-adaptive/30min?hide_event_type_details=1&hide_gdpr_banner=1';
-  document.getElementById('book').addEventListener('click', () => {
-    if (window.Calendly && typeof window.Calendly.initPopupWidget === 'function') {
-      window.Calendly.initPopupWidget({ url: CALENDLY_URL });
-    } else {
-      window.open(CALENDLY_URL, '_blank', 'noopener');
-    }
-  });
-</script>
+<!-- FOOTER: loaded from footer.html by site-nav.js -->
+<div data-include="footer.html"></div>
+<script src="site-nav.js"></script>
 </body>
 </html>
