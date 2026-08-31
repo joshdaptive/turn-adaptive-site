@@ -724,3 +724,5 @@ table.agenda .loc{      /* location */
   table.agenda td{ display:block; padding:2px 0; border:none; width:auto; }
   table.agenda .loc{ text-align:left; padding-left:0; }
 }
+
+.hero-ctas{ justify-content:center; }
