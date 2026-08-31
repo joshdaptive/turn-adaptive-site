@@ -18,10 +18,10 @@
 </script>
 </head>
 <body>
- 
+
 <!-- MENU: loaded from nav.html by site-nav.js -->
-<div data-include="Nav.html"></div>
- 
+<div data-include="nav.html"></div>
+
 <main>
 <section class="hero" data-screen-label="01 Hero">
   <div class="wrap">
@@ -33,6 +33,40 @@
           <a href="contact.html" class="btn btn-primary">Turn adaptive <span class="arr">&rarr;</span></a>
           <a href="services.html" class="btn btn-ghost">The services</a>
         </div>
+
+        <!-- ==========================================================
+             UPCOMING ENGAGEMENTS — placeholder rows.
+             Edit the <tr> rows below: .d = date, .e = event
+             (wrap the event name in <em> for the italic serif),
+             .loc = location. Copy a <tr> to add another line.
+             ========================================================== -->
+        <div class="hero-agenda" aria-label="Upcoming engagements">
+          <div class="agenda-head">
+            <span class="eyebrow"><span class="dot"></span>On the road</span>
+            <a href="engagements.html" class="agenda-more">All engagements &rarr;</a>
+          </div>
+          <table class="agenda">
+            <tbody>
+              <tr>
+                <td class="d">Mon 00</td>
+                <td class="e">Keynote &mdash; <em>Event name here</em></td>
+                <td class="loc">City, ST</td>
+              </tr>
+              <tr>
+                <td class="d">Mon 00</td>
+                <td class="e">Panel &mdash; <em>Event name here</em></td>
+                <td class="loc">City, ST</td>
+              </tr>
+              <tr>
+                <td class="d">Mon 00</td>
+                <td class="e">Workshop &mdash; <em>Event name here</em></td>
+                <td class="loc">City, ST</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- ====================== end engagements ===================== -->
+
       </div>
       <div class="hero-portrait">
         <img src="assets/liz-portrait.png" alt="Elizabeth Turner" />
@@ -45,10 +79,10 @@
   </div>
 </section>
 </main>
- 
+
 <!-- FOOTER: loaded from footer.html by site-nav.js -->
-<div data-include="Footer.html"></div>
- 
-<script src="Site nav.js"></script>
+<div data-include="footer.html"></div>
+
+<script src="site-nav.js"></script>
 </body>
 </html>
