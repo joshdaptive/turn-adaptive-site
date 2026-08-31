@@ -17,6 +17,12 @@
   --serif: "Cormorant Garamond", "Times New Roman", serif;
   --sans: "Inter", system-ui, -apple-system, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+
+  /* Shared hero-column measure. rem (not ch) on purpose: it computes to
+     the SAME pixel width on every element regardless of their font size,
+     so the lede, the CTA and the agenda table always align. A ch value
+     would resolve per-element and desync them. Change it once, here. */
+  --hero-col: 35rem;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -47,12 +53,16 @@ a{color:inherit;text-decoration:none}
 }
 .talk.featured .venue::after{background:var(--peach);opacity:.55}
 
+/* ── Content width (one definition, mobile → 4K) ──────────
+   Full-bleed green nav/footer are intentional; the CONTENT stays
+   capped and centred so it never sprawls into the wide green voids
+   on ultrawide monitors. */
 .wrap{
   width:100%;max-width:min(1440px, 92vw);
   margin:0 auto;padding:0 clamp(24px, 4vw, 72px);
 }
-@media (min-width:2200px){.wrap{max-width:1680px}}
-@media (min-width:3000px){.wrap{max-width:1880px}}
+@media (min-width:2200px){.wrap{max-width:1500px}}
+@media (min-width:3000px){.wrap{max-width:1560px}}
 
 .eyebrow{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.28em;
@@ -69,10 +79,39 @@ a{color:inherit;text-decoration:none}
 }
 .nav.scrolled{background:var(--forest-deep)}
 .nav-row{display:flex;align-items:center;justify-content:space-between;height:80px}
+
 .brand{
-  display:flex;align-items:center;gap:0;
+  display:flex;align-items:center;
+  gap:22px;                 /* space so the badge clears the wordmark's rules */
   color:var(--paper);line-height:1;
 }
+
+/* Logo badge — raised green tile (reads on the forest nav) */
+.brand-mark{
+  height:50px;
+  width:auto;
+  aspect-ratio:470 / 291;
+  padding:6px 9px;
+  border-radius:9px;
+  background:linear-gradient(157deg, #46624E 0%, #35493B 55%, #2A3A2F 100%);
+  border:1px solid rgba(245,239,230,.28);
+  box-shadow:
+    0 1px 2px rgba(10,16,12,.22),
+    0 4px 10px rgba(10,16,12,.24),
+    inset 0 1px 0 rgba(255,255,255,.10);
+  display:block;
+  flex:0 0 auto;
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.brand:hover .brand-mark{
+  transform:translateY(-1px);
+  border-color:rgba(232,168,124,.55);
+  box-shadow:
+    0 2px 4px rgba(10,16,12,.24),
+    0 7px 16px rgba(10,16,12,.28),
+    inset 0 1px 0 rgba(255,255,255,.12);
+}
+
 .brand .wordmark{
   display:flex;flex-direction:column;align-items:flex-start;gap:5px;
   padding:4px 0 5px;
@@ -103,6 +142,7 @@ a{color:inherit;text-decoration:none}
 .nav-links{display:flex;gap:38px;align-items:center}
 .nav-links a{font-size:13px;color:rgba(245,239,230,.78);transition:color .2s;letter-spacing:.02em}
 .nav-links a:hover{color:var(--peach)}
+.nav-links a.active{color:var(--peach)}
 .nav-links a.cta{
   color:var(--paper);border:1px solid rgba(245,239,230,.45);
   padding:10px 20px;border-radius:0;
@@ -233,13 +273,23 @@ a{color:inherit;text-decoration:none}
 }
 .hero .lede{
   font-size:clamp(17px,1.4vw,21px);line-height:1.6;color:var(--ink-soft);
-  max-width:560px;margin:0 0 40px;font-weight:400;text-wrap:pretty;
+  margin:0 0 40px;font-weight:400;text-wrap:pretty;
 }
 .hero .lede em{
   font-family:var(--serif);font-style:italic;color:var(--ink);
   font-weight:400;
 }
-.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+
+/* The lede, the CTA row and the agenda table all share one width,
+   so their left AND right edges line up. Change --hero-col (top of
+   file) to move all three together. */
+.hero .lede,
+.hero-ctas,
+.hero-agenda{ max-width:var(--hero-col); }
+
+.hero-ctas{ display:block; }
+.hero-ctas .btn{ display:flex; justify-content:center; }  /* fills the column, centres its label */
+
 .btn{
   display:inline-flex;align-items:center;gap:14px;
   padding:16px 26px;font-family:var(--mono);
@@ -252,6 +302,51 @@ a{color:inherit;text-decoration:none}
 .btn-ghost:hover{border-color:var(--ink)}
 .btn .arr{transition:transform .2s}
 .btn:hover .arr{transform:translateX(4px)}
+
+/* Upcoming-engagements table (hero) */
+.hero-agenda{ margin-top:44px; }
+.agenda-head{
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:16px; margin-bottom:12px; padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+.agenda-more{
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--ink-muted); transition:color .2s;
+  white-space:nowrap;
+}
+.agenda-more:hover{ color:var(--blood); }
+
+table.agenda{ width:100%; border-collapse:collapse; }
+table.agenda td{
+  padding:12px 0; vertical-align:baseline;
+  border-bottom:1px solid var(--rule-soft);
+  font-size:14.5px; color:var(--ink-soft); line-height:1.4;
+}
+table.agenda tr:last-child td{ border-bottom:none; }
+table.agenda .d{        /* date — as narrow as its text */
+  font-family:var(--mono); font-size:11px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--blood); font-weight:500;
+  white-space:nowrap; width:1%; padding-right:24px;
+}
+table.agenda .e{        /* event — absorbs the slack, pushing loc to the edge */
+  width:100%; color:var(--ink);
+}
+table.agenda .e em{
+  font-family:var(--serif); font-style:italic; font-size:1.18em;
+  font-weight:500; color:var(--ink);
+}
+table.agenda .loc{      /* location — flush right */
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-muted);
+  white-space:nowrap; text-align:right; padding-left:18px;
+}
+@media (max-width:560px){
+  table.agenda tr{ display:block; padding:12px 0; border-bottom:1px solid var(--rule-soft); }
+  table.agenda tr:last-child{ border-bottom:none; }
+  table.agenda td{ display:block; padding:2px 0; border:none; width:auto; }
+  table.agenda .loc{ text-align:left; padding-left:0; }
+}
 
 /* Portrait */
 .hero-portrait{
@@ -272,14 +367,15 @@ a{color:inherit;text-decoration:none}
   content:"";position:absolute;inset:14px;z-index:3;
   border:1px solid rgba(245,239,230,.20);pointer-events:none;
 }
-.portrait-tag{
-  position:absolute;left:32px;top:32px;z-index:4;
+.portrait-tag{           /* bottom-right of the portrait */
+  position:absolute;right:32px;bottom:32px;z-index:4;
   font-family:var(--mono);font-size:10px;letter-spacing:.26em;
   color:var(--paper);text-transform:uppercase;line-height:1.5;
   background:rgba(31,45,36,.45);padding:8px 12px 8px 14px;
   border-left:2px solid var(--peach);backdrop-filter:blur(4px);
 }
 .portrait-tag b{font-weight:500;color:var(--paper)}
+@media (max-width:640px){.portrait-tag{right:20px;bottom:20px}}
 
 /* Speaking credentials strip */
 .speak-creds{
@@ -359,7 +455,7 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 .services{background:var(--paper)}
 .services-list{border-top:1px solid var(--rule)}
 .svc{
-  display:grid;grid-template-columns:80px 1.1fr 1fr; /* arrow column (was 70px) removed */
+  display:grid;grid-template-columns:80px 1.1fr 1fr;
   gap:48px;align-items:start;padding:46px 0;
   border-bottom:1px solid var(--rule);
   transition:padding .25s ease,background .25s;
@@ -576,10 +672,9 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 .contact-meta dd a{border-bottom:1px solid var(--rule)}
 
 /* ── Booking action (contact) ────────────────────────
-   Moved out of contact.html's inline <style>. Type, spacing and color
-   all resolve from the tokens above: the serif/sans come from --serif /
-   --sans, and the button inherits currentColor rather than a hex, so it
-   can't drift out of the palette. */
+   Type, spacing and color resolve from the tokens above: the serif/sans
+   come from --serif / --sans, and the button inherits currentColor rather
+   than a hex, so it can't drift out of the palette. */
 .booking{margin-top:clamp(2.5rem,6vw,4rem)}
 .book-btn{
   display:inline-flex;align-items:baseline;gap:.7rem;max-width:100%;
@@ -608,126 +703,3 @@ footer{
 }
 footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
 footer .star{color:var(--peach)}
-
-
-/* ── Badge ─────────────────────────────── */
-
-.brand{
-  display:flex;align-items:center;
-  gap:22px;                 /* more space so the badge clears the title's rules */
-  color:var(--paper);line-height:1;
-}
-
-.brand-mark{
-  height:50px;
-  width:auto;
-  aspect-ratio:470 / 291;
-  padding:6px 9px;
-  border-radius:9px;
-  background:linear-gradient(157deg, #46624E 0%, #35493B 55%, #2A3A2F 100%);
-  border:1px solid rgba(245,239,230,.28);   /* whisper of an edge, not a frame */
-  box-shadow:
-    0 1px 2px rgba(10,16,12,.22),
-    0 4px 10px rgba(10,16,12,.24),
-    inset 0 1px 0 rgba(255,255,255,.10);
-  display:block;
-  flex:0 0 auto;
-  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-}
-
-.brand:hover .brand-mark{
-  transform:translateY(-1px);
-  border-color:rgba(232,168,124,.55);
-  box-shadow:
-    0 2px 4px rgba(10,16,12,.24),
-    0 7px 16px rgba(10,16,12,.28),
-    inset 0 1px 0 rgba(255,255,255,.12);
-}
-
-
-/* ══════════════════════════════════════════════════════════
-   HOME PAGE + RESPONSIVE PATCHES  (append to end of styles.css)
-   ══════════════════════════════════════════════════════════ */
-
-/* ── 1. Ultrawide / 4K handling ────────────────────────────
-   The green nav + footer are full-bleed on purpose (edge-to-edge
-   reads as intentional, not broken). The thing that looked wrong
-   on your wide monitor was the *content* sprawling: your old .wrap
-   jumped to 1680px then 1880px on big screens, so on a 4K panel the
-   hero and the nav row stretched into those wide green voids.
-   This caps content at a comfortable, aligned width so nav, hero
-   and footer all line up and sit centered with balanced margins —
-   from phones up to 4K. */
-.wrap{ max-width:min(1440px, 92vw); }
-@media (min-width:2200px){ .wrap{ max-width:1500px; } }  /* was 1680 */
-@media (min-width:3000px){ .wrap{ max-width:1560px; } }  /* was 1880 */
-
-/* If you'd instead prefer the green bars themselves to stop before
-   the screen edge on huge monitors (a "framed" look rather than
-   full-bleed), delete the three lines above and use this instead:
-
-   .nav, footer{ background:var(--paper); }
-   .nav > .wrap, footer > .wrap{
-     background:var(--forest); border-radius:0;
-   }
-   footer > .wrap{ background:var(--forest-deep); }
-   — but full-bleed is the more common, sturdier choice. */
-
-/* ── 2. Founder tag → bottom-right of the portrait ─────────── */
-.portrait-tag{
-  top:auto;  bottom:32px;
-  left:auto; right:32px;
-}
-@media (max-width:640px){
-  .portrait-tag{ bottom:20px; right:20px; }
-}
-
-/* ── 3. Upcoming-engagements table (hero) ──────────────────── */
-.hero-agenda{ margin-top:44px; max-width:560px; }
-.agenda-head{
-  display:flex; align-items:baseline; justify-content:space-between;
-  gap:16px; margin-bottom:12px; padding-bottom:10px;
-  border-bottom:1px solid var(--rule);
-}
-.agenda-more{
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.16em;
-  text-transform:uppercase; color:var(--ink-muted); transition:color .2s;
-}
-.agenda-more:hover{ color:var(--blood); }
-
-table.agenda{ width:100%; border-collapse:collapse; }
-table.agenda td{
-  padding:12px 0; vertical-align:baseline;
-  border-bottom:1px solid var(--rule-soft);
-  font-size:14.5px; color:var(--ink-soft); line-height:1.4;
-}
-table.agenda tr:last-child td{ border-bottom:none; }
-table.agenda .d{        /* date */
-  font-family:var(--mono); font-size:11px; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--blood); font-weight:500;
-  white-space:nowrap; width:1%; padding-right:24px;
-}
-table.agenda .e{ color:var(--ink); }   /* event */
-table.agenda .e em{
-  font-family:var(--serif); font-style:italic; font-size:1.18em;
-  font-weight:500; color:var(--ink);
-}
-table.agenda .loc{      /* location */
-  font-family:var(--mono); font-size:10.5px; letter-spacing:.1em;
-  text-transform:uppercase; color:var(--ink-muted);
-  white-space:nowrap; text-align:right; padding-left:18px;
-}
-/* stack the columns on narrow screens so nothing gets squeezed */
-@media (max-width:560px){
-  table.agenda tr{ display:block; padding:12px 0; border-bottom:1px solid var(--rule-soft); }
-  table.agenda tr:last-child{ border-bottom:none; }
-  table.agenda td{ display:block; padding:2px 0; border:none; width:auto; }
-  table.agenda .loc{ text-align:left; padding-left:0; }
-}
-
-.hero .lede,
-.hero-ctas,
-.hero-agenda{ max-width:560px; }
-
-.hero-ctas{ display:block; }
-.hero-ctas .btn{ display:flex; justify-content:center; }
