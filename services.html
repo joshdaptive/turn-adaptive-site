@@ -8,115 +8,85 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQ4S57N02X"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-JQ4S57N02X');
 </script>
 </head>
 <body>
+<!-- MENU: loaded from nav.html by site-nav.js -->
+<div data-include="nav.html"></div>
 
-<header class="nav" id="nav">
-  <div class="wrap nav-row">
-    <a href="index.html" class="brand" aria-label="Turner Adaptive Strategies">
-      <span class="wordmark">
-        <span class="top">Turner <em>Adaptive</em> Strategies</span>
-      </span>
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="practice.html">Practice</a>
-      <a href="services.html">Services</a>
-      <a href="approach.html">Approach</a>
-      <a href="speaking.html">Speaking</a>
-      <a href="topics.html">Topics</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main id="top">
-
-<!-- SERVICES -->
-<section class="services" id="services" data-screen-label="03 Services">
+<main>
+<section class="services" data-screen-label="Services">
   <div class="wrap">
     <div class="sec-head">
-      <div class="kicker">
-        <span class="eyebrow"><span class="dot"></span>Services</span>
-      </div>
-      <h2>Four signature engagements,<br>and the <em>work that follows</em>.</h2>
+      <div class="kicker"><span class="eyebrow"><span class="dot"></span>Services</span></div>
+      <h2>Four signature engagements,<br><em>and the work that follows.</em></h2>
     </div>
 
     <div class="services-list">
+
       <div class="svc">
         <div class="n">i.</div>
         <div>
           <h3>Knowledge Audit</h3>
-          <div class="tags">Bylaws · Playbooks · Continuity</div>
+          <div class="tags">Bylaws &middot; Playbooks &middot; Continuity</div>
         </div>
         <p>A structured assessment of how your organization creates, shares, and retains knowledge across core documents, program playbooks, and team workflows. The result is a practical strategy that identifies continuity risks and closes the knowledge gaps that matter most.</p>
-        <!-- <div class="arrow">→</div> -->
       </div>
+
       <div class="svc">
         <div class="n">ii.</div>
         <div>
           <h3>Data Discovery Workshop</h3>
-          <div class="tags">Impact · Donor Landscape · Market Funnel</div>
+          <div class="tags">Impact &middot; Donor Landscape &middot; Market Funnel</div>
         </div>
-        <p>An intensive workshop focused on the systems already collecting your most valuable information, including program impact, donor behavior, and market signals. You’ll leave with a clearer understanding of what your data can answer today and where the gaps still are.</p>
-        <!-- <div class="arrow">→</div> -->
+        <p>An intensive workshop focused on the systems already collecting your most valuable information, including program impact, donor behavior, and market signals. You'll leave with a clearer understanding of what your data can answer today and where the gaps still are.</p>
       </div>
+
       <div class="svc">
         <div class="n">iii.</div>
         <div>
           <h3>Culture Audit</h3>
-          <div class="tags">Collaboration · Unspoken Rules · Volunteer Retention</div>
+          <div class="tags">Collaboration &middot; Unspoken Rules &middot; Volunteer Retention</div>
         </div>
         <p>An honest assessment of how the organization actually operates, including collaboration patterns, unwritten norms, and the conditions that keep volunteers and staff engaged. The goal is to identify where culture supports the mission and where it may be holding the organization back.</p>
-        <!-- <div class="arrow">→</div> -->
       </div>
+
       <div class="svc">
         <div class="n">iv.</div>
         <div>
           <h3>Executive Onboarding &amp; Coaching</h3>
-          <div class="tags">Context · Public Conflict · Mission to Ops</div>
+          <div class="tags">Context &middot; Public Conflict &middot; Mission to Ops</div>
         </div>
         <p>Personalized development for incoming executives and directors: building real contextual fluency, navigating conflict in the public eye, and translating mission and vision into operational decisions that hold up under scrutiny.</p>
-        <!-- <div class="arrow">→</div> -->
       </div>
+
       <div class="svc">
         <div class="n">v.</div>
         <div>
           <h3>Advisory Engagements</h3>
-          <div class="tags">Strategy · Process · Change · AI Readiness</div>
+          <div class="tags">Strategy &middot; Process &middot; Change &middot; AI Readiness</div>
         </div>
-        <p>For organizations facing challenges that don’t fit neatly into a single category, these engagements provide ongoing strategic support across operations, process design, leadership, and AI readiness.</p>
-        <!-- <div class="arrow">→</div> -->
+        <p>For organizations facing challenges that don't fit neatly into a single category, these engagements provide ongoing strategic support across operations, process design, leadership, and AI readiness.</p>
       </div>
+
     </div>
   </div>
 </section>
 </main>
 
-<footer>
-  <div class="wrap row">
-    <span>© MMXXVI · Turner Adaptive Strategies, LLC</span>
-    <span>Strategy <span class="star">✦</span> Process <span class="star">✦</span> Knowledge <span class="star">✦</span> People</span>
-    <span>turn-adaptive.com</span>
-  </div>
-</footer>
-
-<script>
-  // Sticky nav background change on scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 12);
-  }, { passive: true });
-</script>
-
+<!-- FOOTER: loaded from footer.html by site-nav.js -->
+<div data-include="footer.html"></div>
+<script src="site-nav.js"></script>
 </body>
 </html>
