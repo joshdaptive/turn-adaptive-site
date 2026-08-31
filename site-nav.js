@@ -1,26 +1,22 @@
 /* ============================================================
-   site-nav.js — loads shared HTML fragments into each page
+   site-nav.js — shared site chrome + home-page agenda mirror
    ------------------------------------------------------------
-   No markup lives in here. Any element with a data-include
-   attribute gets replaced by the contents of the file it names:
+   1. Includes: <div data-include="file.html"></div> → that file.
+   2. Active link: the current page's nav link gets .active.
+   3. Agenda mirror: any element with data-agenda-source="X.html"
+      has its <table.agenda> body filled from that page's
+      #engagements-source rows.
+        • Rows WITH data-date="YYYY-MM-DD": upcoming only, soonest first.
+        • Rows WITHOUT a date: shown in document order after the dated
+          ones (so placeholders still appear before you add real dates).
+      data-agenda-limit sets how many rows (default 3).
 
-       <div data-include="nav.html"></div>
-       <div data-include="footer.html"></div>
-
-   Edit nav.html / footer.html to change the menu or footer once
-   for the whole site. Add this before </body> on every page:
-
-       <script src="site-nav.js"></script>
-
-   NOTE: fetch() does not work when you open a page as a file://
-   URL. Preview over a local server instead, e.g.:
-
-       python3 -m http.server        (then visit http://localhost:8000)
-
-   On your live host it just works.
+   Needs a server (http/https), not file://.  Local preview:
+     python3 -m http.server   → http://localhost:8000
    ============================================================ */
 (function () {
 
+  /* ---- 1. HTML includes ---- */
   function loadIncludes() {
     var hosts = Array.prototype.slice.call(
       document.querySelectorAll('[data-include]')
@@ -32,22 +28,19 @@
           if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
           return res.text();
         })
-        .then(function (html) {
-          host.outerHTML = html;
-        })
+        .then(function (html) { host.outerHTML = html; })
         .catch(function (err) {
           console.error('[site-nav] could not load "' + url + '":', err);
         });
     }));
   }
 
+  /* ---- 2. Active link ---- */
   function currentPage() {
     var name = location.pathname.split('/').pop();
     return (name || 'index.html').toLowerCase();
   }
-
-  function enhance() {
-    /* highlight the link for the page you're on */
+  function markActiveLinks() {
     var here = currentPage();
     document.querySelectorAll('.nav-links a').forEach(function (a) {
       var target = (a.getAttribute('href') || '').split('/').pop().toLowerCase();
@@ -56,21 +49,80 @@
         a.setAttribute('aria-current', 'page');
       }
     });
+  }
 
-    /* keep your .nav.scrolled behaviour working, centrally */
+  /* ---- scrolled state (keeps .nav.scrolled working) ---- */
+  function scrolledState() {
     var nav = document.getElementById('nav');
-    if (nav) {
-      var onScroll = function () {
-        nav.classList.toggle('scrolled', window.scrollY > 8);
-      };
-      onScroll();
-      window.addEventListener('scroll', onScroll, { passive: true });
-    }
+    if (!nav) return;
+    var onScroll = function () {
+      nav.classList.toggle('scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  function start() {
-    loadIncludes().then(enhance);
+  /* ---- 3. Home-page agenda mirror ---- */
+  function hydrateAgendas() {
+    document.querySelectorAll('[data-agenda-source]').forEach(function (mount) {
+      var src   = mount.getAttribute('data-agenda-source');
+      var limit = parseInt(mount.getAttribute('data-agenda-limit') || '3', 10);
+      var tbody = mount.querySelector('table.agenda tbody');
+      if (!tbody) return;
+
+      fetch(src)
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+          return res.text();
+        })
+        .then(function (html) {
+          var doc = new DOMParser().parseFromString(html, 'text/html');
+          var all = Array.prototype.slice.call(
+            doc.querySelectorAll('#engagements-source tbody tr')
+          );
+
+          var today = new Date(); today.setHours(0, 0, 0, 0);
+
+          function whenOf(tr) {
+            var raw = tr.getAttribute('data-date');   // expects YYYY-MM-DD
+            if (!raw) return null;
+            var d = new Date(raw + 'T00:00:00');
+            return isNaN(d.getTime()) ? null : d;
+          }
+
+          // Dated + upcoming, soonest first:
+          var dated = all
+            .map(function (tr) { return { tr: tr, when: whenOf(tr) }; })
+            .filter(function (x) { return x.when && x.when >= today; })
+            .sort(function (a, b) { return a.when - b.when; })
+            .map(function (x) { return x.tr; });
+
+          // Undated rows keep document order (placeholders still show):
+          var undated = all.filter(function (tr) { return !whenOf(tr); });
+
+          var rows = dated.concat(undated).slice(0, limit);
+
+          if (!rows.length) { mount.hidden = true; return; }
+
+          tbody.innerHTML = '';
+          rows.forEach(function (tr) {
+            tbody.appendChild(document.importNode(tr, true)); // clone across docs
+          });
+        })
+        .catch(function (err) {
+          console.error('[site-nav] agenda mirror failed from "' + src + '":', err);
+          mount.hidden = true;  // degrade cleanly instead of an empty block
+        });
+    });
   }
+
+  function enhance() {
+    markActiveLinks();
+    scrolledState();
+    hydrateAgendas();
+  }
+
+  function start() { loadIncludes().then(enhance); }
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', start);
