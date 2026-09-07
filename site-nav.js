@@ -6,9 +6,12 @@
    3. Agenda mirror: any element with data-agenda-source="X.html"
       has its <table.agenda> body filled from that page's
       #engagements-source rows.
-        • Rows WITH data-date="YYYY-MM-DD": upcoming only, soonest first.
-        • Rows WITHOUT a date: shown in document order after the dated
-          ones (so placeholders still appear before you add real dates).
+        • A row's date comes from data-date="YYYY-MM-DD" if present,
+          else parsed from its .d cell ("Wednesday, November 18, 2026"
+          and "November 6, 2014" both work).
+        • Dated rows: upcoming only, soonest first; dates shown
+          compact ("Nov 18") on the mirror, full on the source page.
+        • Undated rows: document order, after the dated ones.
       data-agenda-limit sets how many rows (default 3).
 
    Needs a server (http/https), not file://.  Local preview:
@@ -62,6 +65,11 @@
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
+  /* ---- date parsing for the agenda mirror ---- */
+  var MONTHS = ['january','february','march','april','may','june',
+                'july','august','september','october','november','december'];
+  var DATE_TEXT = new RegExp('(' + MONTHS.join('|') + ')\\s+(\\d{1,2})\\s*,\\s*(\\d{4})', 'i');
+
   /* ---- 3. Home-page agenda mirror ---- */
   function hydrateAgendas() {
     document.querySelectorAll('[data-agenda-source]').forEach(function (mount) {
@@ -84,10 +92,17 @@
           var today = new Date(); today.setHours(0, 0, 0, 0);
 
           function whenOf(tr) {
-            var raw = tr.getAttribute('data-date');   // expects YYYY-MM-DD
-            if (!raw) return null;
-            var d = new Date(raw + 'T00:00:00');
-            return isNaN(d.getTime()) ? null : d;
+            var raw = tr.getAttribute('data-date');   // YYYY-MM-DD, wins if present
+            if (raw) {
+              var d = new Date(raw + 'T00:00:00');
+              if (!isNaN(d.getTime())) return d;
+            }
+            // Fall back to the visible date cell, e.g.
+            // "Wednesday, November 18, 2026" or "November 6, 2014".
+            var cell = tr.querySelector('.d');
+            var m = cell && cell.textContent.match(DATE_TEXT);
+            if (!m) return null;
+            return new Date(+m[3], MONTHS.indexOf(m[1].toLowerCase()), +m[2]);
           }
 
           // Dated + upcoming, soonest first:
@@ -106,7 +121,14 @@
 
           tbody.innerHTML = '';
           rows.forEach(function (tr) {
-            tbody.appendChild(document.importNode(tr, true)); // clone across docs
+            var clone = document.importNode(tr, true);   // clone across docs
+            var when = whenOf(tr);
+            var d = clone.querySelector('.d');
+            if (when && d) {                 // compact date for the hero table
+              d.textContent = when.toLocaleDateString('en-US',
+                { month: 'short', day: 'numeric' });
+            }
+            tbody.appendChild(clone);
           });
         })
         .catch(function (err) {
