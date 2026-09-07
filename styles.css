@@ -31,6 +31,7 @@ body{
   background:var(--paper);color:var(--ink);
   font-weight:400;line-height:1.55;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:clip;   /* phones: nothing may drag the page sideways */
 }
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--blood);color:var(--paper)}
@@ -84,6 +85,7 @@ a{color:inherit;text-decoration:none}
   display:flex;align-items:center;
   gap:22px;                 /* space so the badge clears the wordmark's rules */
   color:var(--paper);line-height:1;
+  min-width:0;              /* allow the wordmark to shrink on phones */
 }
 
 /* Logo badge — raised green tile (reads on the forest nav) */
@@ -135,9 +137,15 @@ a{color:inherit;text-decoration:none}
   color:rgba(245,239,230,.78);line-height:1;
 }
 @media (max-width:640px){
-  .brand .wordmark .top{font-size:18px}
-  .brand .wordmark .top em{font-size:20px}
+  .brand{gap:13px}
+  .brand-mark{height:40px;padding:5px 7px;border-radius:7px}
+  .brand .wordmark .top{font-size:17px}
+  .brand .wordmark .top em{font-size:19px}
   .brand .wordmark .sub{font-size:8.5px;letter-spacing:.28em}
+}
+@media (max-width:390px){
+  .brand .wordmark .top{font-size:15px}
+  .brand .wordmark .top em{font-size:17px}
 }
 .nav-links{display:flex;gap:38px;align-items:center}
 .nav-links a{font-size:13px;color:rgba(245,239,230,.78);transition:color .2s;letter-spacing:.02em}
@@ -150,7 +158,14 @@ a{color:inherit;text-decoration:none}
   transition:all .2s;
 }
 .nav-links a.cta:hover{background:var(--blood);border-color:var(--blood);color:var(--paper)}
-@media (max-width:820px){.nav-links a{display:none}.nav-links a:last-child{display:inline-block}}
+/* ≤820px: keep every tab. The bar wraps to two rows — brand on the
+   first, all four tabs on the second — so nothing collides with the
+   logo and nothing is hidden. */
+@media (max-width:820px){
+  .nav-row{flex-wrap:wrap;height:auto;min-height:60px;padding:10px 0 12px;row-gap:2px}
+  .nav-links{width:100%;gap:24px;justify-content:flex-start}
+  .nav-links a{font-size:12.5px;padding:4px 0}
+}
 
 /* ── Hero ────────────────────────────────────────────── */
 .hero{
@@ -241,7 +256,7 @@ a{color:inherit;text-decoration:none}
   font-size:84px;color:rgba(45,63,51,.16);line-height:1;letter-spacing:-.02em;
   user-select:none;
 }
-@media (max-width:820px){
+@media (max-width:920px){
   .hero-deco .protractor,.hero-deco .glyph-3{display:none}
   .hero-deco .ring,.hero-deco .ring-2{width:340px;height:340px;top:-120px;right:-120px}
   .hero-deco .compass,.hero-deco .ring-3,.hero-deco .glyph-2,.hero-deco .diamond{display:none}
@@ -252,14 +267,14 @@ a{color:inherit;text-decoration:none}
   display:grid;grid-template-columns:1.05fr .95fr;gap:0;
   min-height:720px;align-items:stretch;position:relative;z-index:2;
 }
-@media (max-width:920px){.hero-inner{grid-template-columns:1fr;min-height:auto}}
+
 
 .hero-text{
   padding:clamp(80px,8vw,140px) clamp(32px,4vw,72px) clamp(80px,8vw,140px) 0;
   display:flex;flex-direction:column;justify-content:center;
   position:relative;z-index:2;
 }
-@media (max-width:920px){.hero-text{padding:90px 0 56px}}
+
 .hero h1{
   font-family:var(--serif);font-weight:400;
   font-size:clamp(56px,8vw,128px);
@@ -302,6 +317,9 @@ a{color:inherit;text-decoration:none}
 .btn-ghost:hover{border-color:var(--ink)}
 .btn .arr{transition:transform .2s}
 .btn:hover .arr{transform:translateX(4px)}
+@media (max-width:420px){
+  .btn{font-size:11px;letter-spacing:.14em;padding:14px 18px}
+}
 
 /* Upcoming-engagements table (hero) */
 .hero-agenda{ margin-top:44px; }
@@ -376,6 +394,30 @@ table.agenda .loc{      /* location — flush right */
 }
 .portrait-tag b{font-weight:500;color:var(--paper)}
 @media (max-width:640px){.portrait-tag{right:20px;bottom:20px}}
+
+/* ≤920px: single column. .hero-text dissolves (display:contents) so its
+   children and the portrait become siblings and can be reordered:
+   headline + lede first, then the portrait, then Book-an-engagement and
+   the agenda. Spacing that lived on .hero-text moves to the children.
+   The children also lose .hero-text's stacking context, so they get
+   their own z-index to stay above the hero's background layers. */
+@media (max-width:920px){
+  .hero-inner{display:flex;flex-direction:column;min-height:auto}
+  .hero-text{display:contents}
+  .hero h1,.hero .lede,.hero-ctas,.hero-agenda{position:relative;z-index:2}
+  .hero h1{order:1;margin-top:76px}
+  .hero .lede{order:2;margin-bottom:0}
+  .hero-portrait{
+    order:3;width:100%;margin:32px 0 40px;
+    min-height:0;aspect-ratio:4 / 5;max-height:72vh;
+  }
+  .hero-ctas{order:4}
+  .hero-agenda{order:5;margin-bottom:64px}
+}
+@media (max-width:560px){
+  .hero h1{font-size:clamp(40px,12.5vw,56px);margin-top:56px}
+  .hero-portrait{margin:24px 0 32px;aspect-ratio:3 / 4}
+}
 
 /* Speaking credentials strip */
 .speak-creds{
@@ -619,6 +661,7 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
   line-height:.96;letter-spacing:-.02em;
   margin:24px 0 56px;max-width:14ch;color:var(--ink);text-wrap:balance;
 }
+@media (max-width:560px){.contact h2{font-size:clamp(38px,12vw,56px)}}
 .contact h2 em{font-style:italic;color:var(--blood)}
 .contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:80px;align-items:start}
 @media (max-width:820px){.contact-grid{grid-template-columns:1fr;gap:48px}}
