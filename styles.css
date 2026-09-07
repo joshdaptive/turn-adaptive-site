@@ -359,6 +359,22 @@ table.agenda .loc{      /* location — flush right */
   text-transform:uppercase; color:var(--ink-muted);
   white-space:nowrap; text-align:right; padding-left:18px;
 }
+/* Links inside the agenda tables: quiet rust underline so they read
+   as links without breaking the table's typography. */
+table.agenda a{
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-color:rgba(184,84,44,.5);   /* --blood at half strength */
+  text-decoration-thickness:1px;
+  text-underline-offset:3px;
+  transition:color .2s, text-decoration-color .2s;
+}
+table.agenda a:hover,
+table.agenda a:focus-visible{
+  color:var(--blood);
+  text-decoration-color:var(--blood);
+}
+
 @media (max-width:560px){
   table.agenda tr{ display:block; padding:12px 0; border-bottom:1px solid var(--rule-soft); }
   table.agenda tr:last-child{ border-bottom:none; }
