@@ -482,7 +482,9 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 .sec-head h2 em{font-style:italic;color:var(--blood);font-weight:400}
 .sec-head .kicker{display:flex;align-items:center;gap:14px}
 .sec-head .num{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink-muted)}
-
+/* When a section header has no kicker (just the h2), let the heading
+   span the full width instead of the narrow first track. */
+.sec-head h2:only-child{grid-column:1 / -1;margin-top:0}
 /* ── Practice ────────────────────────────────────────── */
 .practice{background:var(--paper-2)}
 .practice-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:8px}
