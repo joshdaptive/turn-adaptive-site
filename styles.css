@@ -683,6 +683,22 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
   pointer-events:none;
 }
 .contact .wrap{position:relative;z-index:1}
+/* Contact page has a single narrow column of content; centre it in the
+   wrap and centre its text, so it doesn't hug the left with an empty
+   right half. Scoped to .contact so no other page is affected. */
+.contact .wrap{
+  max-width:760px;
+  margin-inline:auto;
+  text-align:center;
+}
+.contact .lede{
+  max-width:none;      /* was capped at 480px and left-aligned */
+  margin-inline:auto;
+}
+.contact .booking{
+  display:flex;
+  justify-content:center;
+}
 .contact h2{
   font-family:var(--serif);font-weight:400;
   font-size:clamp(56px,8vw,128px);
