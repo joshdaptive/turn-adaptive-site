@@ -14,7 +14,7 @@
         • Undated rows: document order, after the dated ones.
       data-agenda-limit sets how many engagement rows (default 3).
 
-   4. NEW — event grouping + offers. On a source row:
+   4. Event grouping + offers. On a source row:
         data-event="KMWorld 2026"      groups sibling rows under one
                                        header; 2+ rows required.
         data-venue="JW Marriott, …"    shown right-aligned on the header.
@@ -28,10 +28,25 @@
       passed, because the upcoming-only filter runs first — no manual
       cleanup, no expiry date to maintain.
 
+   5. Past-engagement marking: on the source page, rows dated before
+      today get .past so CSS can dim them. Re-evaluated each load.
+
+   ── CACHE VERSION ──────────────────────────────────────────
+   VERSION (below) is stamped onto every file this script fetches:
+   the nav/footer includes and the agenda source. Bump it in this
+   one place and those fetches all pull fresh copies. NOTE: it can't
+   version site-nav.js or styles.css themselves — the browser loads
+   those from the page's own tags before this code runs, so their
+   ?v= (if any) lives on each page's <script>/<link>.
+
    Needs a server (http/https), not file://.  Local preview:
      python3 -m http.server   → http://localhost:8000
    ============================================================ */
 (function () {
+
+  /* The single source of truth for cache versioning. Change this one
+     value to bust every include + the agenda fetch site-wide. */
+  var VERSION = '3';
 
   /* Grouped rows repeat their venue in the last cell, which the group
      header already states. Set to false to keep the cell as authored. */
@@ -40,6 +55,11 @@
   var DEFAULT_OFFER_LINK = 'Register through this link';
   var DEFAULT_OFFER_TEXT = '{link} for a discounted rate, or use code {code} at checkout.';
 
+  /* Append the cache version to a URL, choosing ? or & correctly. */
+  function withVersion(url) {
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + VERSION;
+  }
+
   /* ---- 1. HTML includes ---- */
   function loadIncludes() {
     var hosts = Array.prototype.slice.call(
@@ -47,7 +67,7 @@
     );
     return Promise.all(hosts.map(function (host) {
       var url = host.getAttribute('data-include');
-      return fetch(url)
+      return fetch(withVersion(url))
         .then(function (res) {
           if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
           return res.text();
@@ -91,20 +111,24 @@
                 'july','august','september','october','november','december'];
   var DATE_TEXT = new RegExp('(' + MONTHS.join('|') + ')\\s+(\\d{1,2})\\s*,\\s*(\\d{4})', 'i');
 
-  /* ---- grouping helpers ---- */
-  /* Read a row's date from its data-date="YYYY-MM-DD" attribute.
-     Self-contained — no shared constants needed. */
+  /* Read a row's date: data-date wins, else parse the .d cell text. */
   function rowDate(tr) {
-    var raw = tr.getAttribute('data-date');
-    if (!raw) return null;
-    var d = new Date(raw + 'T00:00:00');   // local midnight, no TZ drift
-    return isNaN(d.getTime()) ? null : d;
+    var raw = tr.getAttribute('data-date');   // YYYY-MM-DD, wins if present
+    if (raw) {
+      var d = new Date(raw + 'T00:00:00');    // local midnight, no TZ drift
+      if (!isNaN(d.getTime())) return d;
+    }
+    var cell = tr.querySelector('.d');
+    var m = cell && cell.textContent.match(DATE_TEXT);
+    if (!m) return null;
+    return new Date(+m[3], MONTHS.indexOf(m[1].toLowerCase()), +m[2]);
   }
- /* ---- Past-engagement marking (source page only) ----
-  On whichever page owns #engagements-source, tag every row whose
-  date is before today with .past so CSS can dim it. Re-evaluated
-  on each load, so events fade on their own as their date passes —
-  the file never needs editing. */
+
+  /* ---- Past-engagement marking (source page only) ----
+     On whichever page owns #engagements-source, tag every row whose
+     date is before today with .past so CSS can dim it. Re-evaluated
+     on each load, so events fade on their own as their date passes —
+     the file never needs editing. */
   function markPastEngagements() {
     var table = document.getElementById('engagements-source');
     if (!table) return;                       // no-op on pages without the source
@@ -114,6 +138,8 @@
       if (when && when < today) tr.classList.add('past');
     });
   }
+
+  /* ---- grouping helpers ---- */
 
   /* Rows sharing a data-event value collect into one group, in order of
      first appearance. Rows without one stay on their own. */
@@ -231,7 +257,7 @@
       var tbody = mount.querySelector('table.agenda tbody');
       if (!tbody) return;
 
-      fetch(src)
+      fetch(withVersion(src))
         .then(function (res) {
           if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
           return res.text();
@@ -244,29 +270,15 @@
 
           var today = new Date(); today.setHours(0, 0, 0, 0);
 
-          function whenOf(tr) {
-            var raw = tr.getAttribute('data-date');   // YYYY-MM-DD, wins if present
-            if (raw) {
-              var d = new Date(raw + 'T00:00:00');
-              if (!isNaN(d.getTime())) return d;
-            }
-            // Fall back to the visible date cell, e.g.
-            // "Wednesday, November 18, 2026" or "November 6, 2014".
-            var cell = tr.querySelector('.d');
-            var m = cell && cell.textContent.match(DATE_TEXT);
-            if (!m) return null;
-            return new Date(+m[3], MONTHS.indexOf(m[1].toLowerCase()), +m[2]);
-          }
-
           // Dated + upcoming, soonest first:
           var dated = all
-            .map(function (tr) { return { tr: tr, when: whenOf(tr) }; })
+            .map(function (tr) { return { tr: tr, when: rowDate(tr) }; })
             .filter(function (x) { return x.when && x.when >= today; })
             .sort(function (a, b) { return a.when - b.when; })
             .map(function (x) { return x.tr; });
 
           // Undated rows keep document order (placeholders still show):
-          var undated = all.filter(function (tr) { return !whenOf(tr); });
+          var undated = all.filter(function (tr) { return !rowDate(tr); });
 
           // The limit counts engagements. Group headers and offer notes
           // are chrome and don't consume a slot.
@@ -284,7 +296,7 @@
 
             group.rows.forEach(function (tr) {
               var clone = document.importNode(tr, true);   // clone across docs
-              var when = whenOf(tr);
+              var when = rowDate(tr);
               var d = clone.querySelector('.d');
               if (when && d) {                 // compact date for the hero table
                 d.textContent = when.toLocaleDateString('en-US',
