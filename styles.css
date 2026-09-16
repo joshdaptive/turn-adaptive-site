@@ -741,7 +741,24 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 }
 .contact-meta dd{margin:0;font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:400}
 .contact-meta dd a{border-bottom:1px solid var(--rule)}
-
+/* Contact page: when the meta sits in the two-column grid, stack the
+   three items vertically as a sidebar beside the invitation, instead of
+   the full-width 3-across strip. Scoped to .contact-grid so the strip
+   layout is untouched anywhere else it might be used. */
+.contact-grid .contact-meta{
+  grid-template-columns:1fr;
+  margin-top:0;
+  border-top:none;
+}
+.contact-grid .contact-meta > div{
+  padding:18px 0;
+  border-right:none;
+  border-top:1px solid var(--rule);
+}
+.contact-grid .contact-meta > div:first-child{
+  padding-top:0;
+  border-top:none;
+}
 /* ── Booking action (contact) ────────────────────────
    Type, spacing and color resolve from the tokens above: the serif/sans
    come from --serif / --sans, and the button inherits currentColor rather
