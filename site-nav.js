@@ -93,6 +93,21 @@
 
   /* ---- grouping helpers ---- */
 
+ /* ---- Past-engagement marking (source page only) ----
+  On whichever page owns #engagements-source, tag every row whose
+  date is before today with .past so CSS can dim it. Re-evaluated
+  on each load, so events fade on their own as their date passes —
+  the file never needs editing. */
+  function markPastEngagements() {
+    var table = document.getElementById('engagements-source');
+    if (!table) return;                       // no-op on pages without the source
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    table.querySelectorAll('tbody tr').forEach(function (tr) {
+      var when = rowDate(tr);
+      if (when && when < today) tr.classList.add('past');
+    });
+  }
+
   /* Rows sharing a data-event value collect into one group, in order of
      first appearance. Rows without one stay on their own. */
   function groupRows(rows) {
@@ -294,6 +309,7 @@
     markActiveLinks();
     scrolledState();
     hydrateAgendas();
+    markPastEngagements();
   }
 
   function start() { loadIncludes().then(enhance); }
