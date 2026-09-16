@@ -359,6 +359,10 @@ table.agenda .loc{      /* location — flush right */
   text-transform:uppercase; color:var(--ink-muted);
   white-space:nowrap; text-align:right; padding-left:18px;
 }
+/* Past engagements recede once their date has passed. .past is added
+   by site-nav.js from each row's data-date — no markup edits needed. */
+table.agenda tr.past td{ opacity:.5; }
+table.agenda tr.past .d{ color:var(--ink-muted); }   /* drop the rust accent — it's done, not upcoming */
 /* Links inside the agenda tables: quiet rust underline so they read
    as links without breaking the table's typography. */
 table.agenda a{
