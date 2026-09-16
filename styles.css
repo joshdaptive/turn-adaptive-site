@@ -692,8 +692,9 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
   text-align:center;
 }
 .contact .lede{
-  max-width:none;      /* was capped at 480px and left-aligned */
+  max-width:38ch;
   margin-inline:auto;
+  text-align:left;
 }
 .contact .booking{
   display:flex;
