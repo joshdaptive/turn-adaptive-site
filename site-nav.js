@@ -92,7 +92,14 @@
   var DATE_TEXT = new RegExp('(' + MONTHS.join('|') + ')\\s+(\\d{1,2})\\s*,\\s*(\\d{4})', 'i');
 
   /* ---- grouping helpers ---- */
-
+  /* Read a row's date from its data-date="YYYY-MM-DD" attribute.
+     Self-contained — no shared constants needed. */
+  function rowDate(tr) {
+    var raw = tr.getAttribute('data-date');
+    if (!raw) return null;
+    var d = new Date(raw + 'T00:00:00');   // local midnight, no TZ drift
+    return isNaN(d.getTime()) ? null : d;
+  }
  /* ---- Past-engagement marking (source page only) ----
   On whichever page owns #engagements-source, tag every row whose
   date is before today with .past so CSS can dim it. Re-evaluated
