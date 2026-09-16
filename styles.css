@@ -675,107 +675,44 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
   background:var(--paper);position:relative;overflow:hidden;
   border-bottom:none;padding:clamp(110px,12vw,180px) 0 110px;
 }
+/* Single soft glow, upper-right only. (The former lower-left rust glow
+   was removed — on this sparse, centred page it read as a stray smudge.) */
 .contact::before{
   content:"";position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 70% 50% at 90% 20%, rgba(45,63,51,.10), transparent 60%),
-    radial-gradient(ellipse 60% 60% at 10% 90%, rgba(184,84,44,.10), transparent 60%);
+    radial-gradient(ellipse 70% 50% at 90% 20%, rgba(45,63,51,.10), transparent 60%);
   pointer-events:none;
 }
-.contact .wrap{position:relative;z-index:1}
-/* Contact page has a single narrow column of content; centre it in the
-   wrap and centre its text, so it doesn't hug the left with an empty
-   right half. Scoped to .contact so no other page is affected. */
+/* Contact page is one narrow column: centre the whole block in the wrap
+   and centre the headline + CTA. The paragraph itself is overridden back
+   to left-aligned below so its left edge stays straight (no ragged
+   "Jenga" wrap). */
 .contact .wrap{
+  position:relative;z-index:1;
   max-width:760px;
   margin-inline:auto;
   text-align:center;
-}
-.contact .lede{
-  max-width:38ch;
-  margin-inline:auto;
-  text-align:left;
-}
-.contact .booking{
-  display:flex;
-  justify-content:center;
 }
 .contact h2{
   font-family:var(--serif);font-weight:400;
   font-size:clamp(56px,8vw,128px);
   line-height:.96;letter-spacing:-.02em;
-  margin:24px 0 56px;max-width:14ch;color:var(--ink);text-wrap:balance;
+  margin:24px auto 56px;max-width:14ch;color:var(--ink);text-wrap:balance;
 }
 @media (max-width:560px){.contact h2{font-size:clamp(38px,12vw,56px)}}
 .contact h2 em{font-style:italic;color:var(--blood)}
-.contact-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:80px;align-items:start}
-@media (max-width:820px){.contact-grid{grid-template-columns:1fr;gap:48px}}
+/* One lede rule (the earlier duplicate is gone). Centred block, but the
+   text is LEFT-aligned so lines stack with a straight left edge. */
 .contact .lede{
   font-size:17px;line-height:1.65;color:var(--ink-soft);
-  max-width:480px;margin:0 0 36px;text-wrap:pretty;
+  max-width:44ch;margin:0 auto 36px;
+  text-align:left;text-wrap:pretty;
 }
-.contact-form{
-  background:var(--paper-2);border:1px solid var(--rule);padding:36px;
-}
-.contact-form label{
-  font-family:var(--mono);font-size:10px;letter-spacing:.22em;
-  color:var(--ink-muted);text-transform:uppercase;display:block;margin-bottom:8px;
-}
-.contact-form input,.contact-form textarea,.contact-form select{
-  width:100%;background:transparent;border:none;
-  border-bottom:1px solid var(--rule);
-  padding:8px 0 14px;color:var(--ink);
-  font-family:var(--sans);font-size:15px;
-  margin-bottom:24px;outline:none;transition:border-color .2s;
-}
-.contact-form input:focus,.contact-form textarea:focus,.contact-form select:focus{
-  border-bottom-color:var(--blood);
-}
-.contact-form select option{background:var(--paper);color:var(--ink)}
-.contact-form textarea{min-height:80px;resize:vertical}
-.contact-form button{
-  width:100%;padding:18px;background:var(--forest);color:var(--paper);
-  border:none;font-family:var(--mono);font-weight:500;font-size:11.5px;
-  letter-spacing:.24em;text-transform:uppercase;cursor:pointer;
-  transition:background .2s;
-}
-.contact-form button:hover{background:var(--ink)}
-.contact-form .sent{
-  text-align:center;padding:24px;
-  font-family:var(--serif);font-style:italic;font-size:22px;color:var(--blood);
+.contact .booking{
+  display:flex;
+  justify-content:center;
 }
 
-.contact-meta{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:0;
-  margin-top:80px;border-top:1px solid var(--rule);
-}
-@media (max-width:720px){.contact-meta{grid-template-columns:1fr}}
-.contact-meta > div{padding:28px 28px;border-right:1px solid var(--rule)}
-.contact-meta > div:last-child{border-right:none}
-.contact-meta dt{
-  font-family:var(--mono);font-size:10px;letter-spacing:.22em;
-  color:var(--ink-muted);text-transform:uppercase;margin-bottom:10px;
-}
-.contact-meta dd{margin:0;font-family:var(--serif);font-size:20px;color:var(--ink);font-weight:400}
-.contact-meta dd a{border-bottom:1px solid var(--rule)}
-/* Contact page: when the meta sits in the two-column grid, stack the
-   three items vertically as a sidebar beside the invitation, instead of
-   the full-width 3-across strip. Scoped to .contact-grid so the strip
-   layout is untouched anywhere else it might be used. */
-.contact-grid .contact-meta{
-  grid-template-columns:1fr;
-  margin-top:0;
-  border-top:none;
-}
-.contact-grid .contact-meta > div{
-  padding:18px 0;
-  border-right:none;
-  border-top:1px solid var(--rule);
-}
-.contact-grid .contact-meta > div:first-child{
-  padding-top:0;
-  border-top:none;
-}
 /* ── Booking action (contact) ────────────────────────
    Type, spacing and color resolve from the tokens above: the serif/sans
    come from --serif / --sans, and the button inherits currentColor rather
