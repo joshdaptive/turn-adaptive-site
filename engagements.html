@@ -17,6 +17,11 @@
   body{ min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; }
   main{ flex:1 0 auto; }
   .engagements{ border-bottom:none; }
+  /* Past engagements dim automatically once their date has passed.
+   The .past class is added by the script near </body>, based on
+   each row's data-date — no manual editing needed. */
+  table.agenda tr.past td{ opacity:.5; }
+  table.agenda tr.past a{ text-decoration-color:transparent; }
 </style>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
