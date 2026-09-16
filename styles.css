@@ -32,6 +32,12 @@ body{
   font-weight:400;line-height:1.55;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   overflow-x:clip;   /* phones: nothing may drag the page sideways */
+
+  /* Sticky-footer scaffold (global). A full-height flex column lets the
+     footer's margin-top:auto pin it to the bottom on short pages, so
+     services/contact match index/engagements. See the footer section. */
+  min-height:100vh; min-height:100dvh;
+  display:flex; flex-direction:column;
 }
 a{color:inherit;text-decoration:none}
 ::selection{background:var(--blood);color:var(--paper)}
@@ -761,10 +767,23 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 }
 
 /* ── Footer ──────────────────────────────────────────── */
+/* margin-top:auto is the other half of the sticky-footer scaffold on
+   <body> (top of file): on a short page it soaks up the leftover
+   vertical space and pins the footer to the bottom; on a tall page
+   there's no slack to absorb, so it's a no-op. Because it lives here
+   in the shared stylesheet, every page behaves the same — no per-page
+   inline <style> needed. */
 footer{
+  margin-top:auto;
   background:var(--forest-deep);color:rgba(245,239,230,.6);
   padding:36px 0;border-top:1px solid rgba(245,239,230,.14);
   font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
 }
 footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px}
 footer .star{color:var(--peach)}
+
+/* Drop the divider hairline on whichever section ends the page, so it
+   doesn't float at the top of the empty space above a pinned footer.
+   Covers the section being the last child of <main> or of <body>. */
+main > section:last-child,
+body > section:last-child{ border-bottom:none; }
