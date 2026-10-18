@@ -72,6 +72,49 @@
     </div>
   </div>
 </section>
+
+<!-- ============================================================
+     ON STAGE — a full-bleed strip of conference photography.
+     The header sits inside .wrap so it lines up with everything
+     else; the strip itself is a direct child of the section, which
+     is what lets it run edge to edge, the same trick the green nav
+     and footer use. One link wraps the whole strip rather than five
+     identical ones, but each image keeps real alt text so the
+     photographs stay findable.
+     Four photographs, not five: four divides into a clean 2x2 when
+     the strip wraps on a phone, and these are small originals, so
+     fewer and wider beats more and narrower.
+     Each carries its own object-position because the subject sits at
+     a different height in every frame — that is per-photo art
+     direction, not a style, which is why it lives on the element.
+     Collages are deliberately excluded: a picture that is itself two
+     pictures reads as noise beside single-subject shots.
+     To change a photo: swap src, width, height, alt and the crop
+     together.
+     ============================================================ -->
+<section class="onstage" data-screen-label="On stage">
+  <div class="wrap">
+    <div class="agenda-head">
+      <span class="eyebrow"><span class="dot"></span>On stage</span>
+      <a href="media.html" class="agenda-more">All media &rarr;</a>
+    </div>
+  </div>
+
+  <a class="onstage-strip" href="media.html" aria-label="Photographs, white papers and press material">
+    <img src="assets/Kmworld%202018%20DC%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" width="480" height="640" loading="lazy"
+         style="object-position:center 18%"
+         alt="Elizabeth Turner speaking from the podium at KMWorld 2018 in Washington, D.C." />
+    <img src="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland.jpg" width="512" height="683" loading="lazy"
+         style="object-position:center 32%"
+         alt="Elizabeth Turner at the IFLA Knowledge Management open session, IFLA WLIC 2017 in Wroclaw" />
+    <img src="assets/2015%20IFLA%20WLIC%20Cape%20Town%20South%20Africa%20%F0%9F%87%BF%F0%9F%87%A6.jpg" width="512" height="384" loading="lazy"
+         style="object-position:center 45%"
+         alt="Elizabeth Turner outside the Cape Town convention center at IFLA WLIC 2015" />
+    <img src="assets/KMWorld%202018%20Washington%20DC.jpg" width="512" height="512" loading="lazy"
+         style="object-position:center 8%"
+         alt="Elizabeth Turner presenting at KMWorld 2018, gesturing to the audience" />
+  </a>
+</section>
 </main>
 
 <!-- FOOTER: loaded from footer.html by site-nav.js -->
