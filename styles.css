@@ -570,17 +570,25 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
   align-items:end;margin-bottom:clamp(56px,7vw,100px);
 }
 @media (max-width:820px){.sec-head{grid-template-columns:1fr;gap:24px}}
+/* Each inner page opens with its own top-level heading, so that heading
+   is an <h1> — one per page is what search engines and screen readers
+   look for, and the home page already has one in the hero. The rules
+   are written for both elements so the markup can say what the heading
+   IS without the type changing. */
+.sec-head h1,
 .sec-head h2{
   font-family:var(--serif);font-weight:400;
   font-size:clamp(40px,5vw,84px);
   line-height:1.02;letter-spacing:-.015em;
   margin:14px 0 0;color:var(--ink);text-wrap:balance;
 }
+.sec-head h1 em,
 .sec-head h2 em{font-style:italic;color:var(--blood);font-weight:400}
 .sec-head .kicker{display:flex;align-items:center;gap:14px}
 .sec-head .num{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--ink-muted)}
 /* When a section header has no kicker (just the h2), let the heading
    span the full width instead of the narrow first track. */
+.sec-head h1:only-child,
 .sec-head h2:only-child{grid-column:1 / -1;margin-top:0}
 /* ── Practice ────────────────────────────────────────── */
 .practice{background:var(--paper-2)}
@@ -657,7 +665,9 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
   pointer-events:none;
 }
 .approach .wrap{position:relative;z-index:1}
+.approach .sec-head h1,
 .approach .sec-head h2{color:var(--paper)}
+.approach .sec-head h1 em,
 .approach .sec-head h2 em{color:var(--peach)}
 .approach .sec-head .num{color:rgba(245,239,230,.55)}
 .approach .sec-head .eyebrow{color:rgba(245,239,230,.7)}
@@ -780,13 +790,15 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
   margin-inline:auto;
   text-align:center;
 }
+.contact h1,
 .contact h2{
   font-family:var(--serif);font-weight:400;
   font-size:clamp(56px,8vw,128px);
   line-height:.96;letter-spacing:-.02em;
   margin:24px auto 56px;max-width:14ch;color:var(--ink);text-wrap:balance;
 }
-@media (max-width:560px){.contact h2{font-size:clamp(38px,12vw,56px)}}
+@media (max-width:560px){.contact h1,.contact h2{font-size:clamp(38px,12vw,56px)}}
+.contact h1 em,
 .contact h2 em{font-style:italic;color:var(--blood)}
 /* One lede rule (the earlier duplicate is gone). Centred block, but the
    text is LEFT-aligned so lines stack with a straight left edge. */
