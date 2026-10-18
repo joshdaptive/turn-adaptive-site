@@ -397,9 +397,18 @@ table.agenda tbody tr.agenda-group:first-child td{padding-top:0}
   font-family:var(--mono);font-size:11px;letter-spacing:.22em;
   text-transform:uppercase;color:var(--ink);
 }
+/* The venue shares a row with the group name and gets only the narrow
+   last column, which in the hero is about 80px wide. Keep the value
+   short in data-venue — a long one wraps to four lines here, where it
+   has the least room and the least to say. */
 .agenda-group-venue{
   text-align:right;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  /* .e carries width:100%, so every other column collapses to the
+     width of its longest word. Without nowrap the venue breaks apart
+     mid-phrase; with it, the column reserves the whole string. Which
+     is the other half of why data-venue must stay short. */
+  white-space:nowrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.1em;
   text-transform:uppercase;color:var(--ink-muted);
 }
 
@@ -422,7 +431,7 @@ table.agenda tr.agenda-note .e em{font-size:1.05em;color:var(--ink-soft)}
 /* A promo code is a thing you retype, so it gets a chip rather than
    running on as prose. */
 .agenda-code{
-  display:inline-block;margin:0 3px;padding:2px 7px;
+  display:inline-block;margin:0 3px;padding:4px 9px;
   font-family:var(--mono);font-size:11px;letter-spacing:.14em;
   text-transform:uppercase;color:var(--blood);
   border:1px solid rgba(184,84,44,.35);
@@ -976,24 +985,30 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 .onstage-strip img{
   flex:1 1 0;min-width:0;
   display:block;width:100%;
-  height:clamp(190px,21vw,300px);
-  object-fit:cover;object-position:center 20%;
+  height:clamp(230px,26vw,360px);
+  object-fit:cover;
+  /* object-position is set per photo in the markup: the subject sits
+     at a different height in each frame, and one shared value crops
+     somebody's head off. */
   background:var(--ink);
-  /* Held back a little so the strip reads as one band instead of five
-     competing photographs; full colour on hover rewards a look. */
-  filter:grayscale(.45) contrast(1.03);
+  /* Only a touch held back — enough to settle four different cameras,
+     white balances and decades into one band, not so much that it
+     looks like a washed-out stock strip. Full color on hover. */
+  filter:grayscale(.25) contrast(1.02);
   transition:filter .35s ease, transform .5s ease;
 }
-.onstage-strip img:hover{filter:none;transform:scale(1.04)}
+.onstage-strip img:hover{filter:none;transform:scale(1.03)}
 .onstage-strip:focus-visible{outline:2px solid var(--blood);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){
   .onstage-strip img{transition:none}
   .onstage-strip img:hover{transform:none}
 }
-/* Phones: two rows of photographs rather than five slivers. */
+/* Phones: a clean 2x2 rather than four slivers. This is why the strip
+   holds four photographs and not five — five wraps to 2+2+1 and the
+   straggler goes full width. */
 @media (max-width:720px){
   .onstage-strip{flex-wrap:wrap}
-  .onstage-strip img{flex:1 1 40%;height:clamp(130px,30vw,190px)}
+  .onstage-strip img{flex:1 1 40%;height:clamp(150px,32vw,210px)}
 }
 
 /* ── Footer ──────────────────────────────────────────── */
