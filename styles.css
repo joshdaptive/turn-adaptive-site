@@ -969,68 +969,6 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 }
 .media-note a:hover{border-bottom-color:var(--blood)}
 
-/* ── On stage (home page photo strip) ────────────────────
-   Proof, placed directly under the hero: the hero says what she does,
-   this shows her doing it. Deliberately quieter than a gallery — no
-   captions, no download links, nothing to read. It is one picture of
-   a career, so it runs edge to edge rather than sitting in a boxed
-   grid, which is the same full-bleed move the nav and footer make.
-   The photographs are small originals, so they are cropped to a band
-   rather than shown whole: a short wide crop hides resolution that a
-   large tile would expose. */
-.onstage{
-  background:var(--paper-2);
-  padding:clamp(56px,6vw,88px) 0 0;
-  border-bottom:1px solid var(--rule);
-}
-.onstage .agenda-head{margin-bottom:clamp(24px,3vw,34px)}
-
-/* 1px gaps with --rule behind them, the hairline language used by
-   .speak-grid and .pillars. A fixed row here, not wrapping tiles, so
-   the strip keeps one clean horizon across the page. */
-.onstage-strip{
-  display:flex;gap:1px;
-  background:var(--rule);
-  border:1px solid var(--rule);border-bottom:none;
-  color:inherit;
-  /* Full-bleed up to a point. Past 1920px a tile would be 700px+ wide
-     by 360 tall — a 2:1 letterbox cut from 3:4 portrait photographs,
-     which on the KMWorld shots is mostly black stage curtain with a
-     small figure at the bottom edge. So the strip caps and centres,
-     the same rule .wrap follows for the same reason: content stays
-     bounded on ultrawide monitors instead of sprawling. On ordinary
-     screens nothing changes; it is still edge to edge. */
-  max-width:1920px;margin:0 auto;
-}
-.onstage-strip img{
-  flex:1 1 0;min-width:0;
-  display:block;width:100%;
-  height:clamp(230px,26vw,400px);
-  object-fit:cover;
-  /* object-position is set per photo in the markup: the subject sits
-     at a different height in each frame, and one shared value crops
-     somebody's head off. */
-  background:var(--ink);
-  /* Only a touch held back — enough to settle four different cameras,
-     white balances and decades into one band, not so much that it
-     looks like a washed-out stock strip. Full color on hover. */
-  filter:grayscale(.25) contrast(1.02);
-  transition:filter .35s ease, transform .5s ease;
-}
-.onstage-strip img:hover{filter:none;transform:scale(1.03)}
-.onstage-strip:focus-visible{outline:2px solid var(--blood);outline-offset:3px}
-@media (prefers-reduced-motion:reduce){
-  .onstage-strip img{transition:none}
-  .onstage-strip img:hover{transform:none}
-}
-/* Phones: a clean 2x2 rather than four slivers. This is why the strip
-   holds four photographs and not five — five wraps to 2+2+1 and the
-   straggler goes full width. */
-@media (max-width:720px){
-  .onstage-strip{flex-wrap:wrap}
-  .onstage-strip img{flex:1 1 40%;height:clamp(150px,32vw,210px)}
-}
-
 /* ── Footer ──────────────────────────────────────────── */
 /* margin-top:auto is the other half of the sticky-footer scaffold on
    <body> (top of file): on a short page it soaks up the leftover
