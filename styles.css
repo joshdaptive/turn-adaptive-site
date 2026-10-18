@@ -772,13 +772,14 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 @media (prefers-reduced-motion:reduce){
   .book-btn,.book-btn .arrow{transition:none}
 }
+
 /* ── Media ───────────────────────────────────────────────
    Two blocks live on this page: the publication list and the photo /
    video grid. Both borrow geometry that already exists elsewhere, so
    the page reads as part of the same system and no other section had
    to change to make room for it:
-     .pub   mirrors .svc  — 80px numeral column, 46px rows, the rust
-                            bar that grows on hover.
+     the list IS table.agenda, the engagements page's own table,
+                            reused verbatim rather than restyled.
      .shot  mirrors .talk / .pillar — tiles on a hairline grid, 1px
                             gaps, --rule for the lines (drawn per tile
                             here; see the note on the gallery below).
@@ -800,54 +801,11 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 .media-sub{margin-top:clamp(64px,7vw,96px)}
 
 /* ── Publications ──
-   Unlike .svc these rows are real links, so the arrow indicator .svc
-   keeps commented out is live here, and the summary stays visible on
-   phones — those lines are the credibility the page exists to carry,
-   which is exactly what a small screen should not drop. */
-.pubs{border-top:1px solid var(--rule)}
-.pub{
-  display:grid;grid-template-columns:80px 1.1fr 1fr 46px;
-  gap:48px;align-items:start;padding:46px 0;
-  border-bottom:1px solid var(--rule);
-  transition:padding .25s ease,background .25s;
-  position:relative;color:inherit;
-}
-.pub::before{
-  content:"";position:absolute;left:0;top:0;bottom:0;width:0;
-  background:var(--blood);transition:width .25s ease;
-}
-.pub:hover{padding-left:24px;padding-right:24px;background:var(--paper-2)}
-.pub:hover::before{width:3px}
-.pub:focus-visible{outline:2px solid var(--blood);outline-offset:4px}
-.pub .n{font-family:var(--serif);font-style:italic;font-size:32px;color:var(--ink-muted);font-weight:400}
-.pub h3{
-  font-family:var(--serif);font-weight:400;font-size:30px;
-  line-height:1.15;margin:0 0 10px;letter-spacing:-.005em;color:var(--ink);text-wrap:balance;
-}
-.pub .tags{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
-  color:var(--ink-muted);text-transform:uppercase;
-}
-.pub p{font-size:15px;line-height:1.65;color:var(--ink-soft);margin:0;text-wrap:pretty}
-/* Titles of works, italicised in the serif — the same treatment they
-   get in the agenda tables and the hero lede. */
-.pub p em{font-family:var(--serif);font-style:italic;font-size:1.12em;color:var(--ink)}
-.pub .arrow{
-  justify-self:end;align-self:center;
-  width:46px;height:46px;border:1px solid var(--rule);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--ink-muted);transition:all .2s;
-}
-.pub:hover .arrow{background:var(--blood);color:var(--paper);border-color:var(--blood)}
-@media (max-width:820px){
-  /* Two columns: numeral, then title and summary stacked beside it.
-     The explicit grid-column keeps the summary out of the numeral
-     gutter, which is where auto-placement would otherwise put it. */
-  .pub{grid-template-columns:60px 1fr;gap:18px 24px;padding:36px 0}
-  .pub h3{font-size:25px}
-  .pub p{grid-column:2}
-  .pub .arrow{display:none}
-}
+   None. The list is table.agenda, exactly as the engagements page
+   builds it, so it needs no rules of its own — including the rust
+   link underline, which table.agenda a already defines. The only
+   addition is a little room under the table before the next block. */
+.media table.agenda{margin-bottom:8px}
 
 /* ── Photographs & video ──
    Elsewhere (.speak-grid, .pillars) the hairlines come from a coloured
