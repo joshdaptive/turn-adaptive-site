@@ -877,33 +877,10 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
    addition is a little room under the table before the next block. */
 .media table.agenda{margin-bottom:8px}
 
-/* A note row belongs to the entry above it rather than standing on its
-   own — on the media page, the volume the preceding chapter appears in.
-   That link buys a book; it is not another thing Elizabeth wrote, and
-   listed flush it read as a fifth credit. The pairing is made with type
-   rather than a new component: the parent drops its rule so the two
-   share one block of space, and the note gives up its year, its rust
-   accent and a little size, so the eye reads it as a continuation of
-   the line above. Same intent as the .agenda-offer row site-nav.js
-   builds under a grouped engagement. .agenda-note is used nowhere else,
-   so these rules reach no other page. */
-table.agenda tr.has-note td{border-bottom:none;padding-bottom:4px}
-table.agenda tr.agenda-note td{
-  padding-top:0;padding-bottom:14px;
-  font-size:13px;color:var(--ink-muted);
-}
-table.agenda tr.agenda-note .e{color:var(--ink-muted)}
-table.agenda tr.agenda-note .e em{font-size:1.05em;color:var(--ink-soft)}
-/* Below 560px table.agenda stacks and moves its rule from the cells to
-   the row itself, so the desktop border override above stops reaching
-   it — without this the note gets cut off from the chapter it belongs
-   to, which is the one thing the pairing exists to prevent. The empty
-   date cell is dropped here too, or it opens a blank line. */
-@media (max-width:560px){
-  table.agenda tr.has-note{border-bottom:none;padding-bottom:0}
-  table.agenda tr.agenda-note{padding-top:4px}
-  table.agenda tr.agenda-note .d{display:none}
-}
+/* The note row under the IFLA chapter — the volume it appears in — is
+   styled with the agenda's own group/offer rules further up this file,
+   not here. It is the same component as the registration note under a
+   grouped engagement, so it is defined once, in the agenda section. */
 
 /* ── Photographs & video ──
    Elsewhere (.speak-grid, .pillars) the hairlines come from a coloured
@@ -970,6 +947,54 @@ table.agenda tr.agenda-note .e em{font-size:1.05em;color:var(--ink-soft)}
   border-bottom:1px solid rgba(184,84,44,.4);padding-bottom:1px;
 }
 .media-note a:hover{border-bottom-color:var(--blood)}
+
+/* ── On stage (home page photo strip) ────────────────────
+   Proof, placed directly under the hero: the hero says what she does,
+   this shows her doing it. Deliberately quieter than a gallery — no
+   captions, no download links, nothing to read. It is one picture of
+   a career, so it runs edge to edge rather than sitting in a boxed
+   grid, which is the same full-bleed move the nav and footer make.
+   The photographs are small originals, so they are cropped to a band
+   rather than shown whole: a short wide crop hides resolution that a
+   large tile would expose. */
+.onstage{
+  background:var(--paper-2);
+  padding:clamp(56px,6vw,88px) 0 0;
+  border-bottom:1px solid var(--rule);
+}
+.onstage .agenda-head{margin-bottom:clamp(24px,3vw,34px)}
+
+/* 1px gaps with --rule behind them, the hairline language used by
+   .speak-grid and .pillars. A fixed row here, not wrapping tiles, so
+   the strip keeps one clean horizon across the page. */
+.onstage-strip{
+  display:flex;gap:1px;
+  background:var(--rule);
+  border-top:1px solid var(--rule);
+  color:inherit;
+}
+.onstage-strip img{
+  flex:1 1 0;min-width:0;
+  display:block;width:100%;
+  height:clamp(190px,21vw,300px);
+  object-fit:cover;object-position:center 20%;
+  background:var(--ink);
+  /* Held back a little so the strip reads as one band instead of five
+     competing photographs; full colour on hover rewards a look. */
+  filter:grayscale(.45) contrast(1.03);
+  transition:filter .35s ease, transform .5s ease;
+}
+.onstage-strip img:hover{filter:none;transform:scale(1.04)}
+.onstage-strip:focus-visible{outline:2px solid var(--blood);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){
+  .onstage-strip img{transition:none}
+  .onstage-strip img:hover{transform:none}
+}
+/* Phones: two rows of photographs rather than five slivers. */
+@media (max-width:720px){
+  .onstage-strip{flex-wrap:wrap}
+  .onstage-strip img{flex:1 1 40%;height:clamp(130px,30vw,190px)}
+}
 
 /* ── Footer ──────────────────────────────────────────── */
 /* margin-top:auto is the other half of the sticky-footer scaffold on
