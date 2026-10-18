@@ -46,7 +46,7 @@
 
   /* The single source of truth for cache versioning. Change this one
      value to bust every include + the agenda fetch site-wide. */
-  var VERSION = '3';
+  var VERSION = '4';
 
   /* Grouped rows repeat their venue in the last cell, which the group
      header already states. Set to false to keep the cell as authored. */
