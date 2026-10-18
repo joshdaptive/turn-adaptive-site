@@ -71,7 +71,7 @@
         "datePublished": "2026",
         "inLanguage": "en",
         "encodingFormat": "application/pdf",
-        "url": "https://turn-adaptive.com/assets/connect-the-dots-visualizing-work-to-accelerate-alignment.pdf",
+        "url": "https://turn-adaptive.com/assets/Connect%20the%20Dots%20with%20Turn-Adaptive.com.pdf",
         "publisher": { "@type": "Organization", "name": "Turner Adaptive Strategies" },
         "about": ["Process modeling", "Organizational alignment", "BPMN", "Knowledge management"]
       },
@@ -82,7 +82,7 @@
         "datePublished": "2026",
         "inLanguage": "en",
         "encodingFormat": "application/pdf",
-        "url": "https://turn-adaptive.com/assets/visualizing-change-how-process-modeling-accelerates-transformation.pdf",
+        "url": "https://turn-adaptive.com/assets/Visualizing%20Change%20with%20Turn-Adaptive.com.pdf",
         "publisher": { "@type": "Organization", "name": "Turner Adaptive Strategies" },
         "about": ["Process modeling", "Change management", "Digital transformation"]
       },
@@ -132,87 +132,59 @@
 
     <!-- ============================================================
          WHITE PAPERS & CHAPTERS
-         One <a class="pub"> per publication. To add one, copy a whole
-         block, bump the roman numeral in .n, and keep the newest at
-         the top. Then add a matching entry to the structured data in
-         <head> so search engines see it too.
-           .n     = roman numeral  (i. ii. iii. iv.)
-           h3     = the title, exactly as published
-           .tags  = format · publisher · year
-           p      = one or two sentences; wrap work titles in <em>
-           .arrow = leave as-is; it animates on hover
-         Use target="_blank" rel="noopener" for anything off-site, and
-         a plain href for a PDF you host in assets/.
+         Same table.agenda markup the engagements page uses, so it
+         inherits that styling exactly — nothing here is styled on
+         its own. One <tr> per publication, newest first.
+           .d   = year
+           .e   = publisher — <em>title</em>, wrapped in the link
+           .loc = what it is  (White paper / Book chapter / Purchase)
+         Copy a <tr>…</tr> to add one. Use target="_blank"
+         rel="noopener" for anything off-site, and a plain href for a
+         PDF hosted in assets/. Then add a matching entry to the
+         structured data in <head> — that block is what carries the
+         detail for search engines now that the page itself is terse.
          ============================================================ -->
     <div class="agenda-head">
       <span class="eyebrow"><span class="dot"></span>White papers &amp; chapters</span>
     </div>
 
-    <div class="pubs">
+    <table class="agenda">
+      <tbody>
 
-      <a class="pub" href="assets/connect-the-dots-visualizing-work-to-accelerate-alignment.pdf">
-        <div class="n">i.</div>
-        <div>
-          <h3>Connect the Dots: Visualizing Work to Accelerate Alignment</h3>
-          <div class="tags">White paper &middot; BTOES &middot; 2026</div>
-        </div>
-        <p>A people-centered approach to process modeling. Start from the happy path, layer information for the audience that needs it, and use a common visual language so systems, risks, data and decisions all sit on one picture instead of in separate heads.</p>
-        <div class="arrow">&rarr;</div>
-      </a>
+        <tr>
+          <td class="d">2026</td>
+          <td class="e"><a href="assets/Connect%20the%20Dots%20with%20Turn-Adaptive.com.pdf">BTOES &mdash; <em>Connect the Dots: Visualizing Work to Accelerate Alignment</em></a></td>
+          <td class="loc">White paper</td>
+        </tr>
 
-      <a class="pub" href="assets/visualizing-change-how-process-modeling-accelerates-transformation.pdf">
-        <div class="n">ii.</div>
-        <div>
-          <h3>Visualizing Change: How Process Modeling Accelerates Transformation</h3>
-          <div class="tags">White paper &middot; BTOES &middot; 2026</div>
-        </div>
-        <p>The four-phase method &mdash; Visualize, Plan, Implement, Control &mdash; for making invisible work visible. Why transformation stalls when people cannot see the complexity they are navigating, and what changes when current state, future state and the path between them are drawn out.</p>
-        <div class="arrow">&rarr;</div>
-      </a>
+        <tr>
+          <td class="d">2026</td>
+          <td class="e"><a href="assets/Visualizing%20Change%20with%20Turn-Adaptive.com.pdf">BTOES &mdash; <em>Visualizing Change: How Process Modeling Accelerates Transformation</em></a></td>
+          <td class="loc">White paper</td>
+        </tr>
 
-      <a class="pub"
-         href="https://www.degruyterbrill.com/document/doi/10.1515/9783110413106-015/html"
-         target="_blank" rel="noopener">
-        <div class="n">iii.</div>
-        <div>
-          <h3>Selection, Implementation, &amp; Behavioural Considerations for Knowledge-management-tool Adoption</h3>
-          <div class="tags">Book chapter &middot; De Gruyter Saur &middot; 2016</div>
-        </div>
-        <p>Written with Spencer Acadia for <em>Knowledge Management in Libraries and Organizations</em>, IFLA Publications 173: how organizations choose a knowledge-management tool, what implementation actually demands of them, and the behaviour that decides whether the tool gets used.</p>
-        <div class="arrow">&rarr;</div>
-      </a>
+        <tr>
+          <td class="d">2016</td>
+          <td class="e"><a href="https://www.degruyterbrill.com/document/doi/10.1515/9783110413106-015/html" target="_blank" rel="noopener">De Gruyter Saur &mdash; <em>Selection, Implementation, &amp; Behavioural Considerations for Knowledge-management-tool Adoption</em></a></td>
+          <td class="loc">Book chapter</td>
+        </tr>
 
-      <a class="pub"
-         href="https://www.degruyterbrill.com/document/doi/10.1515/9783110413106/html"
-         target="_blank" rel="noopener">
-        <div class="n">iv.</div>
-        <div>
-          <h3>Knowledge Management in Libraries and Organizations</h3>
-          <div class="tags">IFLA volume &middot; Hardcover &amp; ebook &middot; Purchase</div>
-        </div>
-        <p>The full IFLA volume the chapter appears in, edited by Leda Bultrini, Sally McCallum, Wilda Newman and Julien Semp&eacute;r&eacute;. Available from the publisher in hardcover (ISBN 978-3-11-041301-4) and as an ebook.</p>
-        <div class="arrow">&rarr;</div>
-      </a>
+        <tr>
+          <td class="d">2016</td>
+          <td class="e"><a href="https://www.degruyterbrill.com/document/doi/10.1515/9783110413106/html" target="_blank" rel="noopener">IFLA Publications 173 &mdash; <em>Knowledge Management in Libraries and Organizations</em></a></td>
+          <td class="loc">Purchase</td>
+        </tr>
 
-      <!-- ── Another publication — PASTE HERE ─────────────────────
-           Drop the PDF into assets/ (lowercase, hyphenated), then
-           uncomment and fill in the four marked spots. Newest goes
-           at the TOP of this list, so renumber the blocks above it.
-           Hosted elsewhere? Put that URL in href and add
-           target="_blank" rel="noopener" instead of the plain href.
+        <!-- ── Another publication — PASTE HERE ───────────────────
+        <tr>
+          <td class="d">YEAR</td>
+          <td class="e"><a href="assets/FILENAME.pdf">PUBLISHER &mdash; <em>TITLE OF THE PAPER</em></a></td>
+          <td class="loc">White paper</td>
+        </tr>
+        ──────────────────────────────────────────────────────── -->
 
-      <a class="pub" href="assets/FILENAME.pdf">
-        <div class="n">v.</div>
-        <div>
-          <h3>TITLE OF THE PAPER</h3>
-          <div class="tags">White paper &middot; PUBLISHER &middot; YEAR</div>
-        </div>
-        <p>ONE OR TWO SENTENCES ON WHAT IT ARGUES.</p>
-        <div class="arrow">&rarr;</div>
-      </a>
-      ────────────────────────────────────────────────────────── -->
-
-    </div>
+      </tbody>
+    </table>
 
     <!-- ============================================================
          PHOTOGRAPHS & VIDEO
@@ -242,115 +214,115 @@
       </figure>
 
       <figure class="shot">
-        <img src="assets/kmworld-podium.jpg" width="480" height="640" loading="lazy"
-             alt="Elizabeth Turner speaking from the podium at the KMWorld conference" />
+        <img src="assets/Kmworld%202018%20DC%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" width="480" height="640" loading="lazy"
+             alt="Elizabeth Turner speaking from the podium at KMWorld 2018 in Washington, D.C." />
         <figcaption>
-          <span><b>Keynote</b><br>KMWorld &middot; Washington, D.C.</span>
-          <a class="dl" href="assets/kmworld-podium.jpg" download>Download &rarr;</a>
+          <span><b>Speaking</b><br>KMWorld 2018 &middot; Washington, D.C.</span>
+          <a class="dl" href="assets/Kmworld%202018%20DC%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/kmworld-podium-taxonomy-boot-camp.jpg" width="512" height="512" loading="lazy"
-             alt="Elizabeth Turner presenting at a KMWorld podium, gesturing to the audience" />
+        <img src="assets/KMWorld%202018%20Washington%20DC.jpg" width="512" height="512" loading="lazy"
+             alt="Elizabeth Turner presenting at KMWorld 2018 in Washington, D.C., gesturing to the audience" />
         <figcaption>
-          <span><b>Session</b><br>KMWorld &middot; Taxonomy Boot Camp</span>
-          <a class="dl" href="assets/kmworld-podium-taxonomy-boot-camp.jpg" download>Download &rarr;</a>
+          <span><b>Session</b><br>KMWorld 2018 &middot; Washington, D.C.</span>
+          <a class="dl" href="assets/KMWorld%202018%20Washington%20DC.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-wlic-2017-wroclaw-podium.jpg" width="512" height="683" loading="lazy"
+        <img src="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland.jpg" width="512" height="683" loading="lazy"
              alt="Elizabeth Turner speaking at the IFLA Knowledge Management open session, IFLA WLIC 2017 in Wroclaw" />
         <figcaption>
           <span><b>Open session</b><br>IFLA WLIC 2017 &middot; Wroc&#322;aw</span>
-          <a class="dl" href="assets/ifla-wlic-2017-wroclaw-podium.jpg" download>Download &rarr;</a>
+          <a class="dl" href="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-wlic-2017-wroclaw-km-open-session.jpg" width="512" height="512" loading="lazy"
+        <img src="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland%20%F0%9F%87%B5%F0%9F%87%B1%202.jpg" width="512" height="512" loading="lazy"
              alt="IFLA Knowledge Management Section open session at IFLA WLIC 2017, with the section members on stage" />
         <figcaption>
           <span><b>KM Section</b><br>IFLA WLIC 2017 &middot; Wroc&#322;aw</span>
-          <a class="dl" href="assets/ifla-wlic-2017-wroclaw-km-open-session.jpg" download>Download &rarr;</a>
+          <a class="dl" href="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland%20%F0%9F%87%B5%F0%9F%87%B1%202.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-km-satellite-conference-panel.jpg" width="512" height="384" loading="lazy"
-             alt="Panel seated on stage at the IFLA Knowledge Management Section satellite conference" />
+        <img src="assets/consultant%20appearance%20on%20AI%20panel%20in%20Corfu%2C%20Greece%202019%20%28photo%20by%20ET%29.jpg" width="512" height="384" loading="lazy"
+             alt="Panel discussion on artificial intelligence at a 2019 conference in Corfu, Greece" />
         <figcaption>
-          <span><b>Panel</b><br>IFLA KM Satellite Conference</span>
-          <a class="dl" href="assets/ifla-km-satellite-conference-panel.jpg" download>Download &rarr;</a>
+          <span><b>AI panel</b><br>Corfu, Greece &middot; 2019</span>
+          <a class="dl" href="assets/consultant%20appearance%20on%20AI%20panel%20in%20Corfu%2C%20Greece%202019%20%28photo%20by%20ET%29.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/workshop-presenting.jpg" width="512" height="512" loading="lazy"
-             alt="Elizabeth Turner leading a workshop session, shown in two frames" />
+        <img src="assets/IFLA%20WLIC%202016%20Columbus%2C%20OH%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" width="512" height="512" loading="lazy"
+             alt="Elizabeth Turner presenting at IFLA WLIC 2016 in Columbus, Ohio, shown in two frames" />
         <figcaption>
-          <span><b>Workshop</b><br>Teaching &amp; facilitation</span>
-          <a class="dl" href="assets/workshop-presenting.jpg" download>Download &rarr;</a>
+          <span><b>Presenting</b><br>IFLA WLIC 2016 &middot; Columbus, OH</span>
+          <a class="dl" href="assets/IFLA%20WLIC%202016%20Columbus%2C%20OH%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-km-session-room.jpg" width="330" height="330" loading="lazy"
-             alt="Delegates seated at round tables during an IFLA Knowledge Management session" />
+        <img src="assets/greece%202019%20athens%20%28ifla%29%202.jpg" width="330" height="330" loading="lazy"
+             alt="Delegates seated at round tables during a session at IFLA WLIC 2019 in Athens" />
         <figcaption>
-          <span><b>Session room</b><br>IFLA Knowledge Management</span>
-          <a class="dl" href="assets/ifla-km-session-room.jpg" download>Download &rarr;</a>
+          <span><b>Session room</b><br>IFLA WLIC 2019 &middot; Athens</span>
+          <a class="dl" href="assets/greece%202019%20athens%20%28ifla%29%202.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-wlic-2015-cape-town.jpg" width="512" height="384" loading="lazy"
+        <img src="assets/2015%20IFLA%20WLIC%20Cape%20Town%20South%20Africa%20%F0%9F%87%BF%F0%9F%87%A6.jpg" width="512" height="384" loading="lazy"
              alt="Elizabeth Turner outside the Cape Town convention centre at IFLA WLIC 2015" />
         <figcaption>
           <span><b>Congress</b><br>IFLA WLIC 2015 &middot; Cape Town</span>
-          <a class="dl" href="assets/ifla-wlic-2015-cape-town.jpg" download>Download &rarr;</a>
+          <a class="dl" href="assets/2015%20IFLA%20WLIC%20Cape%20Town%20South%20Africa%20%F0%9F%87%BF%F0%9F%87%A6.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-wlic-2019-athens-welcome.jpg" width="330" height="330" loading="lazy"
+        <img src="assets/attending%20WLIC%20in%20Athens%202019.jpg" width="330" height="330" loading="lazy"
              alt="Elizabeth Turner outside the 85th IFLA General Conference venue in Athens, 2019" />
         <figcaption>
           <span><b>Congress</b><br>IFLA WLIC 2019 &middot; Athens</span>
-          <a class="dl" href="assets/ifla-wlic-2019-athens-welcome.jpg" download>Download &rarr;</a>
+          <a class="dl" href="assets/attending%20WLIC%20in%20Athens%202019.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-colleagues-garden.jpg" width="480" height="480" loading="lazy"
-             alt="Elizabeth Turner with two IFLA colleagues in a garden during a congress" />
+        <img src="assets/with%20Sylvia%20Piggot%20%28rip%29%20and%20Wilda%20Newman%20from%20IFLA%20WLIC%202017%20Poland%20%F0%9F%87%B5%F0%9F%87%B1.jpg" width="480" height="480" loading="lazy"
+             alt="Elizabeth Turner with Sylvia Piggot and Wilda Newman at IFLA WLIC 2017 in Poland" />
         <figcaption>
-          <span><b>Colleagues</b><br>IFLA Knowledge Management Section</span>
-          <a class="dl" href="assets/ifla-colleagues-garden.jpg" download>Download &rarr;</a>
+          <span><b>Colleagues</b><br>With Sylvia Piggot &amp; Wilda Newman &middot; IFLA WLIC 2017</span>
+          <a class="dl" href="assets/with%20Sylvia%20Piggot%20%28rip%29%20and%20Wilda%20Newman%20from%20IFLA%20WLIC%202017%20Poland%20%F0%9F%87%B5%F0%9F%87%B1.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/ifla-wlic-2019-athens-stage.jpg" width="330" height="330" loading="lazy"
+        <img src="assets/greece%202019%20athens%20%28IFLA%29.jpg" width="330" height="330" loading="lazy"
              alt="Elizabeth Turner on stage at IFLA WLIC 2019 in Athens" />
         <figcaption>
           <span><b>On stage</b><br>IFLA WLIC 2019 &middot; Athens</span>
-          <a class="dl" href="assets/ifla-wlic-2019-athens-stage.jpg" download>Download &rarr;</a>
+          <a class="dl" href="assets/greece%202019%20athens%20%28IFLA%29.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/speaking-live-venue.jpg" width="512" height="640" loading="lazy"
-             alt="Elizabeth Turner speaking with a handheld microphone at a live venue" />
+        <img src="assets/private%20event%2C%202024%20FWTX.jpg" width="512" height="640" loading="lazy"
+             alt="Elizabeth Turner speaking with a handheld microphone at a private event in Fort Worth, 2024" />
         <figcaption>
-          <span><b>Live</b><br>Speaking engagement</span>
-          <a class="dl" href="assets/speaking-live-venue.jpg" download>Download &rarr;</a>
+          <span><b>Private event</b><br>Fort Worth &middot; 2024</span>
+          <a class="dl" href="assets/private%20event%2C%202024%20FWTX.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <!-- ── Athens 2019 video — READY, DELIBERATELY OFF ──────────
-           The clip (assets/ifla-wlic-2019-athens-stage.mp4, 20s,
+           The clip (assets/greece%202019%20athens%20video%20%28ifla%29%20where%20liz%20and%20dancing%20with%20people%20on%20stage.mp4, 20s,
            11 MB) is a handheld pan of the room: shaky, and its rotation
            metadata makes it render on its side, so the poster frame
            comes out sideways too. On a page whose job is credibility
@@ -362,7 +334,7 @@
              alt="Still from a video of Elizabeth Turner on stage at IFLA WLIC 2019 in Athens" />
         <figcaption>
           <span><b>Video</b><br>IFLA WLIC 2019 &middot; Athens</span>
-          <a class="dl" href="assets/ifla-wlic-2019-athens-stage.mp4" target="_blank" rel="noopener">Watch &rarr;</a>
+          <a class="dl" href="assets/greece%202019%20athens%20video%20%28ifla%29%20where%20liz%20and%20dancing%20with%20people%20on%20stage.mp4" target="_blank" rel="noopener">Watch &rarr;</a>
         </figcaption>
       </figure>
       ────────────────────────────────────────────────────────── -->
