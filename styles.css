@@ -373,6 +373,76 @@ table.agenda .loc{      /* location — flush right */
   text-transform:uppercase; color:var(--ink-muted);
   white-space:nowrap; text-align:right; padding-left:18px;
 }
+/* ── Group headers, child rows and offer notes ──────────
+   site-nav.js builds these classes at runtime when two or more
+   engagements share a data-event, and the stylesheet never defined
+   them. So on the home page the group name rendered as a bold centred
+   sans <th>, the venue as plain body text, and the registration note
+   as an unstyled row — three things in a table whose whole character
+   is mono labels against serif titles.
+   Nothing below is new design. The group name takes the mono uppercase
+   register the .d and .loc cells already use, and the note shares its
+   rules with .agenda-note on the media page, because "a line that
+   belongs to the row above it" is the same idea in both places. */
+table.agenda tr.agenda-group th,
+table.agenda tr.agenda-group td{
+  padding:26px 0 10px;vertical-align:baseline;
+  border-bottom:1px solid var(--rule);
+}
+/* No dead space when the group opens the table. */
+table.agenda tbody tr.agenda-group:first-child th,
+table.agenda tbody tr.agenda-group:first-child td{padding-top:0}
+.agenda-group-name{
+  text-align:left;font-weight:500;
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink);
+}
+.agenda-group-venue{
+  text-align:right;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-muted);
+}
+
+/* The offer note on the agenda and .agenda-note on the media page are
+   one component: a line attached to what sits above it. The parent is
+   generated at runtime and can't be given a class, so :has() finds it
+   — which is also why .has-note still exists for the hand-written
+   case on media.html. */
+table.agenda tr.has-note td,
+table.agenda tr:has(+ tr.agenda-offer) td{border-bottom:none;padding-bottom:4px}
+table.agenda tr.agenda-note td,
+table.agenda tr.agenda-offer td{
+  padding-top:0;padding-bottom:14px;
+  font-size:13px;color:var(--ink-muted);
+}
+table.agenda tr.agenda-note .e,
+table.agenda tr.agenda-offer .agenda-offer-cell{color:var(--ink-muted)}
+table.agenda tr.agenda-note .e em{font-size:1.05em;color:var(--ink-soft)}
+
+/* A promo code is a thing you retype, so it gets a chip rather than
+   running on as prose. */
+.agenda-code{
+  display:inline-block;margin:0 3px;padding:2px 7px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--blood);
+  border:1px solid rgba(184,84,44,.35);
+}
+
+@media (max-width:560px){
+  /* Stacked, the rule moves from the cells onto the row, so the
+     pairing has to be re-made there. The offer's leading spacer cell
+     exists only to hold desktop alignment and would stack as a blank
+     line. */
+  table.agenda tr.has-note,
+  table.agenda tr:has(+ tr.agenda-offer){border-bottom:none;padding-bottom:0}
+  table.agenda tr.agenda-note,
+  table.agenda tr.agenda-offer{padding-top:4px}
+  table.agenda tr.agenda-note .d,
+  table.agenda tr.agenda-offer td:not(.agenda-offer-cell){display:none}
+  table.agenda tr.agenda-group th{padding-top:18px}
+  .agenda-group-venue{text-align:left}
+}
+
 /* Past engagements recede once their date has passed. .past is added
    by site-nav.js from each row's data-date — no markup edits needed. */
 table.agenda tr.past td{ opacity:.75; }
