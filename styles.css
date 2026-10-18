@@ -658,26 +658,38 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
    border — outline sits outside the box, so neighbors' lines overlap
    inside the 1px gap and still read as a single shared rule. Leftover
    space on the last row is then just the page. */
+/* A grid, not wrapping flex, because every tile must be the same size.
+   Flex tiles stretch to fill their row, so a row of three came out
+   wider than a row of four and a straggler on the last row widest of
+   all. auto-fill lays down equal tracks across the full width — the
+   last row keeps the same columns whether it holds one tile or four —
+   and the min() lets the column floor drop on a phone so two still
+   fit side by side, without a media query. */
 .media-gallery{
-  display:flex;flex-wrap:wrap;gap:1px;
+  display:grid;gap:1px;
+  grid-template-columns:repeat(auto-fill, minmax(min(260px, 44%), 1fr));
 }
 .shot{
   margin:0;background:var(--paper);
-  display:flex;flex-direction:column;
-  flex:1 1 280px;min-width:0;max-width:420px;
+  display:flex;flex-direction:column;min-width:0;
   outline:1px solid var(--rule);
 }
+/* The photo is the link. It opens the full-size file in a new tab, so
+   the caption needs no download affordance of its own. */
+.shot a{display:block;line-height:0}
 .shot img{
   display:block;width:100%;height:auto;
   aspect-ratio:4 / 5;object-fit:cover;object-position:center top;
   background:var(--ink);   /* holds the frame while the file loads */
+  transition:opacity .2s ease;
 }
+.shot a:hover img{opacity:.88}
+.shot a:focus-visible{outline:2px solid var(--blood);outline-offset:-2px}
 /* A video tile carries its poster frame in the same slot, with the
    4/5 crop relaxed to 16/9 so the frame isn't cut to a portrait. */
 .shot.is-video img{aspect-ratio:16 / 9}
-/* 11px, not the 10–10.5px the site uses for its other mono micro-labels:
-   this caption carries a tappable download link, so it is functional
-   text rather than decoration and gets the larger floor. */
+/* 11px, a touch above the site's other mono micro-labels: a caption is
+   read, not glanced at, and on a video tile it carries the Watch link. */
 .shot figcaption{
   padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;
   font-family:var(--mono);font-size:11px;letter-spacing:.18em;
@@ -695,10 +707,8 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
    the gallery scannable, and the caption's download link still opens
    the full-resolution file. */
 @media (max-width:560px){
-  .shot{flex:1 1 44%;max-width:none}
   /* Narrower tiles buy their room back from the padding and the
-     tracking, never from the type size — the caption holds the
-     download link and has to stay tappable and readable. */
+     tracking, never from the type size. */
   .shot figcaption{padding:14px 14px 16px;letter-spacing:.12em;gap:8px}
 }
 
