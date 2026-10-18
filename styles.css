@@ -991,13 +991,21 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
 .onstage-strip{
   display:flex;gap:1px;
   background:var(--rule);
-  border-top:1px solid var(--rule);
+  border:1px solid var(--rule);border-bottom:none;
   color:inherit;
+  /* Full-bleed up to a point. Past 1920px a tile would be 700px+ wide
+     by 360 tall — a 2:1 letterbox cut from 3:4 portrait photographs,
+     which on the KMWorld shots is mostly black stage curtain with a
+     small figure at the bottom edge. So the strip caps and centres,
+     the same rule .wrap follows for the same reason: content stays
+     bounded on ultrawide monitors instead of sprawling. On ordinary
+     screens nothing changes; it is still edge to edge. */
+  max-width:1920px;margin:0 auto;
 }
 .onstage-strip img{
   flex:1 1 0;min-width:0;
   display:block;width:100%;
-  height:clamp(230px,26vw,360px);
+  height:clamp(230px,26vw,400px);
   object-fit:cover;
   /* object-position is set per photo in the markup: the subject sits
      at a different height in each frame, and one shared value crops
