@@ -807,6 +807,34 @@ section{padding:clamp(90px,11vw,160px) 0;border-bottom:1px solid var(--rule)}
    addition is a little room under the table before the next block. */
 .media table.agenda{margin-bottom:8px}
 
+/* A note row belongs to the entry above it rather than standing on its
+   own — on the media page, the volume the preceding chapter appears in.
+   That link buys a book; it is not another thing Elizabeth wrote, and
+   listed flush it read as a fifth credit. The pairing is made with type
+   rather than a new component: the parent drops its rule so the two
+   share one block of space, and the note gives up its year, its rust
+   accent and a little size, so the eye reads it as a continuation of
+   the line above. Same intent as the .agenda-offer row site-nav.js
+   builds under a grouped engagement. .agenda-note is used nowhere else,
+   so these rules reach no other page. */
+table.agenda tr.has-note td{border-bottom:none;padding-bottom:4px}
+table.agenda tr.agenda-note td{
+  padding-top:0;padding-bottom:14px;
+  font-size:13px;color:var(--ink-muted);
+}
+table.agenda tr.agenda-note .e{color:var(--ink-muted)}
+table.agenda tr.agenda-note .e em{font-size:1.05em;color:var(--ink-soft)}
+/* Below 560px table.agenda stacks and moves its rule from the cells to
+   the row itself, so the desktop border override above stops reaching
+   it — without this the note gets cut off from the chapter it belongs
+   to, which is the one thing the pairing exists to prevent. The empty
+   date cell is dropped here too, or it opens a blank line. */
+@media (max-width:560px){
+  table.agenda tr.has-note{border-bottom:none;padding-bottom:0}
+  table.agenda tr.agenda-note{padding-top:4px}
+  table.agenda tr.agenda-note .d{display:none}
+}
+
 /* ── Photographs & video ──
    Elsewhere (.speak-grid, .pillars) the hairlines come from a coloured
    container showing through 1px gaps. That trick needs full rows: here
