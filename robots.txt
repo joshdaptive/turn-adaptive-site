@@ -1,0 +1,7 @@
+# Everything on this site is public. The one thing this file does is
+# point crawlers at the sitemap so new and changed pages are found
+# promptly rather than whenever the crawler next wanders by.
+User-agent: *
+Allow: /
+
+Sitemap: https://turn-adaptive.com/sitemap.xml
