@@ -194,13 +194,18 @@
 
     <!-- ============================================================
          PHOTOGRAPHS & VIDEO
-         One <figure class="shot"> per item. The grid hugs however
-         many tiles there are, so it looks right with one or with six.
-           img          = 4/5 portrait crop by default
-           .is-video    = add to .shot for a 16/9 poster frame, and
-                          point the caption link at the video
+         One <figure class="shot"> per item. Every tile is the same
+         size whatever the photo's shape — a 4/5 crop in a uniform grid
+         — so the row reads as a set, not a scrapbook.
+           a            = wraps the photo; opens the full-size file in
+                          a new tab. No download link: right-click or
+                          the open tab does it.
+           img          = cropped to 4/5 by CSS; width/height are the
+                          file's real pixels, for layout stability
+           .is-video    = a video tile: poster frame with a Watch link
+                          in the caption, since right-click on a still
+                          would not get you the video
            figcaption b = the label (what the photo IS)
-           .dl          = download or watch link
          Always write a real alt description — it is what an image
          search has to go on.
          ============================================================ -->
@@ -216,110 +221,122 @@
            in assets/ for anyone who needs it. -->
 
       <figure class="shot">
-        <img src="assets/Kmworld%202018%20DC%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" width="480" height="640" loading="lazy"
+        <a href="assets/Kmworld%202018%20DC%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" target="_blank" rel="noopener">
+          <img src="assets/Kmworld%202018%20DC%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" width="480" height="640" loading="lazy"
              alt="Elizabeth Turner speaking from the podium at KMWorld 2018 in Washington, D.C." />
+        </a>
         <figcaption>
           <span><b>Speaking</b><br>KMWorld 2018 &middot; Washington, D.C.</span>
-          <a class="dl" href="assets/Kmworld%202018%20DC%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/KMWorld%202018%20Washington%20DC.jpg" width="512" height="512" loading="lazy"
+        <a href="assets/KMWorld%202018%20Washington%20DC.jpg" target="_blank" rel="noopener">
+          <img src="assets/KMWorld%202018%20Washington%20DC.jpg" width="512" height="512" loading="lazy"
              alt="Elizabeth Turner presenting at KMWorld 2018 in Washington, D.C., gesturing to the audience" />
+        </a>
         <figcaption>
           <span><b>Session</b><br>KMWorld 2018 &middot; Washington, D.C.</span>
-          <a class="dl" href="assets/KMWorld%202018%20Washington%20DC.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland.jpg" width="512" height="683" loading="lazy"
+        <a href="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland.jpg" target="_blank" rel="noopener">
+          <img src="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland.jpg" width="512" height="683" loading="lazy"
              alt="Elizabeth Turner speaking at the IFLA Knowledge Management open session, IFLA WLIC 2017 in Wroclaw" />
+        </a>
         <figcaption>
           <span><b>Open session</b><br>IFLA WLIC 2017 &middot; Wroc&#322;aw</span>
-          <a class="dl" href="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland%20%F0%9F%87%B5%F0%9F%87%B1%202.jpg" width="512" height="512" loading="lazy"
+        <a href="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland%20%F0%9F%87%B5%F0%9F%87%B1%202.jpg" target="_blank" rel="noopener">
+          <img src="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland%20%F0%9F%87%B5%F0%9F%87%B1%202.jpg" width="512" height="512" loading="lazy"
              alt="IFLA Knowledge Management Section open session at IFLA WLIC 2017, with the section members on stage" />
+        </a>
         <figcaption>
           <span><b>KM Section</b><br>IFLA WLIC 2017 &middot; Wroc&#322;aw</span>
-          <a class="dl" href="assets/IFLA%20WLIC%202017%20Wroc%C5%82aw%2C%20Poland%20%F0%9F%87%B5%F0%9F%87%B1%202.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/consultant%20appearance%20on%20AI%20panel%20in%20Corfu%2C%20Greece%202019%20%28photo%20by%20ET%29.jpg" width="512" height="384" loading="lazy"
+        <a href="assets/consultant%20appearance%20on%20AI%20panel%20in%20Corfu%2C%20Greece%202019%20%28photo%20by%20ET%29.jpg" target="_blank" rel="noopener">
+          <img src="assets/consultant%20appearance%20on%20AI%20panel%20in%20Corfu%2C%20Greece%202019%20%28photo%20by%20ET%29.jpg" width="512" height="384" loading="lazy"
              alt="Panel discussion on artificial intelligence at a 2019 conference in Corfu, Greece" />
+        </a>
         <figcaption>
           <span><b>AI panel</b><br>Corfu, Greece &middot; 2019</span>
-          <a class="dl" href="assets/consultant%20appearance%20on%20AI%20panel%20in%20Corfu%2C%20Greece%202019%20%28photo%20by%20ET%29.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/IFLA%20WLIC%202016%20Columbus%2C%20OH%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" width="512" height="512" loading="lazy"
+        <a href="assets/IFLA%20WLIC%202016%20Columbus%2C%20OH%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" target="_blank" rel="noopener">
+          <img src="assets/IFLA%20WLIC%202016%20Columbus%2C%20OH%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" width="512" height="512" loading="lazy"
              alt="Elizabeth Turner presenting at IFLA WLIC 2016 in Columbus, Ohio, shown in two frames" />
+        </a>
         <figcaption>
           <span><b>Presenting</b><br>IFLA WLIC 2016 &middot; Columbus, OH</span>
-          <a class="dl" href="assets/IFLA%20WLIC%202016%20Columbus%2C%20OH%20USA%20%F0%9F%87%BA%F0%9F%87%B8.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/greece%202019%20athens%20%28ifla%29%202.jpg" width="330" height="330" loading="lazy"
+        <a href="assets/greece%202019%20athens%20%28ifla%29%202.jpg" target="_blank" rel="noopener">
+          <img src="assets/greece%202019%20athens%20%28ifla%29%202.jpg" width="330" height="330" loading="lazy"
              alt="Delegates seated at round tables during a session at IFLA WLIC 2019 in Athens" />
+        </a>
         <figcaption>
           <span><b>Session room</b><br>IFLA WLIC 2019 &middot; Athens</span>
-          <a class="dl" href="assets/greece%202019%20athens%20%28ifla%29%202.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/2015%20IFLA%20WLIC%20Cape%20Town%20South%20Africa%20%F0%9F%87%BF%F0%9F%87%A6.jpg" width="512" height="384" loading="lazy"
+        <a href="assets/2015%20IFLA%20WLIC%20Cape%20Town%20South%20Africa%20%F0%9F%87%BF%F0%9F%87%A6.jpg" target="_blank" rel="noopener">
+          <img src="assets/2015%20IFLA%20WLIC%20Cape%20Town%20South%20Africa%20%F0%9F%87%BF%F0%9F%87%A6.jpg" width="512" height="384" loading="lazy"
              alt="Elizabeth Turner outside the Cape Town convention center at IFLA WLIC 2015" />
+        </a>
         <figcaption>
           <span><b>Congress</b><br>IFLA WLIC 2015 &middot; Cape Town</span>
-          <a class="dl" href="assets/2015%20IFLA%20WLIC%20Cape%20Town%20South%20Africa%20%F0%9F%87%BF%F0%9F%87%A6.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/attending%20WLIC%20in%20Athens%202019.jpg" width="330" height="330" loading="lazy"
+        <a href="assets/attending%20WLIC%20in%20Athens%202019.jpg" target="_blank" rel="noopener">
+          <img src="assets/attending%20WLIC%20in%20Athens%202019.jpg" width="330" height="330" loading="lazy"
              alt="Elizabeth Turner outside the 85th IFLA General Conference venue in Athens, 2019" />
+        </a>
         <figcaption>
           <span><b>Congress</b><br>IFLA WLIC 2019 &middot; Athens</span>
-          <a class="dl" href="assets/attending%20WLIC%20in%20Athens%202019.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/with%20Sylvia%20Piggot%20%28rip%29%20and%20Wilda%20Newman%20from%20IFLA%20WLIC%202017%20Poland%20%F0%9F%87%B5%F0%9F%87%B1.jpg" width="480" height="480" loading="lazy"
+        <a href="assets/with%20Sylvia%20Piggot%20%28rip%29%20and%20Wilda%20Newman%20from%20IFLA%20WLIC%202017%20Poland%20%F0%9F%87%B5%F0%9F%87%B1.jpg" target="_blank" rel="noopener">
+          <img src="assets/with%20Sylvia%20Piggot%20%28rip%29%20and%20Wilda%20Newman%20from%20IFLA%20WLIC%202017%20Poland%20%F0%9F%87%B5%F0%9F%87%B1.jpg" width="480" height="480" loading="lazy"
              alt="Elizabeth Turner with Sylvia Piggot and Wilda Newman at IFLA WLIC 2017 in Poland" />
+        </a>
         <figcaption>
           <span><b>Colleagues</b><br>With Sylvia Piggot &amp; Wilda Newman &middot; IFLA WLIC 2017</span>
-          <a class="dl" href="assets/with%20Sylvia%20Piggot%20%28rip%29%20and%20Wilda%20Newman%20from%20IFLA%20WLIC%202017%20Poland%20%F0%9F%87%B5%F0%9F%87%B1.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/greece%202019%20athens%20%28IFLA%29.jpg" width="330" height="330" loading="lazy"
+        <a href="assets/greece%202019%20athens%20%28IFLA%29.jpg" target="_blank" rel="noopener">
+          <img src="assets/greece%202019%20athens%20%28IFLA%29.jpg" width="330" height="330" loading="lazy"
              alt="Elizabeth Turner on stage at IFLA WLIC 2019 in Athens" />
+        </a>
         <figcaption>
           <span><b>On stage</b><br>IFLA WLIC 2019 &middot; Athens</span>
-          <a class="dl" href="assets/greece%202019%20athens%20%28IFLA%29.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
       <figure class="shot">
-        <img src="assets/private%20event%2C%202024%20FWTX.jpg" width="512" height="640" loading="lazy"
+        <a href="assets/private%20event%2C%202024%20FWTX.jpg" target="_blank" rel="noopener">
+          <img src="assets/private%20event%2C%202024%20FWTX.jpg" width="512" height="640" loading="lazy"
              alt="Elizabeth Turner speaking with a handheld microphone at a private event in Fort Worth, 2024" />
+        </a>
         <figcaption>
           <span><b>Private event</b><br>Fort Worth &middot; 2024</span>
-          <a class="dl" href="assets/private%20event%2C%202024%20FWTX.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
 
@@ -348,11 +365,12 @@
            description — it is what an image search has to go on.
 
       <figure class="shot">
-        <img src="assets/FILENAME.jpg" width="0000" height="0000" loading="lazy"
+        <a href="assets/FILENAME.jpg" target="_blank" rel="noopener">
+          <img src="assets/FILENAME.jpg" width="0000" height="0000" loading="lazy"
              alt="DESCRIBE WHAT IS HAPPENING IN THE PHOTO" />
+        </a>
         <figcaption>
           <span><b>LABEL</b><br>WHERE &middot; WHEN</span>
-          <a class="dl" href="assets/FILENAME.jpg" download>Download &rarr;</a>
         </figcaption>
       </figure>
       ────────────────────────────────────────────────────────── -->
