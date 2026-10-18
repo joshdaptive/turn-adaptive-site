@@ -23,10 +23,20 @@
         data-offer-link="Register …"   link text (optional).
         data-offer-text="{link} for …" sentence template (optional);
                                        {link} and {code} are substituted.
+        data-offer-until="2026-10-16"  last day the offer is good
+                                       (optional); see below.
       Only one row per group needs the venue/offer attributes.
-      The offer disappears on its own once every row in the group has
-      passed, because the upcoming-only filter runs first — no manual
-      cleanup, no expiry date to maintain.
+
+      Two different expiries are at work here, and the second exists
+      because the first was not enough. The offer disappears once every
+      row in the group has passed, since the upcoming-only filter runs
+      first. But a discount usually dies BEFORE its event does — an
+      early-bird rate closes weeks ahead of the conference — and in that
+      gap the group is still upcoming, so the note kept advertising a
+      rate that no longer existed. data-offer-until is that earlier
+      deadline: past it the note goes, while the sessions stay listed.
+      Set it to the last day the terms hold. Omit it for a note with no
+      deadline of its own, such as a plain registration link.
 
    5. Past-engagement marking: on the source page, rows dated before
       today get .past so CSS can dim them. Re-evaluated each load.
@@ -46,7 +56,7 @@
 
   /* The single source of truth for cache versioning. Change this one
      value to bust every include + the agenda fetch site-wide. */
-  var VERSION = '4';
+  var VERSION = '5';
 
   /* Grouped rows repeat their venue in the last cell, which the group
      header already states. Set to false to keep the cell as authored. */
@@ -229,6 +239,15 @@
     var url  = attrFromGroup(group, 'data-offer-url');
     var code = attrFromGroup(group, 'data-offer-code');
     if (!url && !code) return null;
+
+    /* Terms that lapse before the event does. Good THROUGH the named
+       day, so compare against its end, not its midnight — an offer
+       marked 2026-10-16 is still live all of the 16th. */
+    var until = attrFromGroup(group, 'data-offer-until');
+    if (until) {
+      var ends = new Date(until + 'T23:59:59');
+      if (!isNaN(ends.getTime()) && ends < new Date()) return null;
+    }
 
     var text  = attrFromGroup(group, 'data-offer-text') || DEFAULT_OFFER_TEXT;
     var label = attrFromGroup(group, 'data-offer-link') || DEFAULT_OFFER_LINK;
